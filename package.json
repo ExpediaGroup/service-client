@@ -1,0 +1,64 @@
+{
+  "name": "@vrbo/service-client",
+  "version": "1.0.0",
+  "description": "A general purpose http client built with extensibility in mind. It also features lifecycle hooks, dynamic hostname resolution, and circuit breaking.",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Expedia Group",
+    "email": "oss@expediagroup.com"
+  },
+  "contributors": [
+    "tlivingston",
+    "tuckbick",
+    "mcjfunk",
+    "holmok",
+    "skphi13"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "echo 'noop'",
+    "test": "npm run eslint && npm run nyc",
+    "eslint": "eslint lib test",
+    "mocha": "mocha test/unit/*.js test/unit/**/*.js",
+    "nyc": "nyc --reporter=text --reporter=text-summary --reporter=html --report-dir=docs/reports/coverage npm run mocha",
+    "postnyc": "nyc check-coverage --statements 98 --branches 95 --functions 100 --lines 98"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/homeaway/service-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/homeaway/service-client/issues"
+  },
+  "engines": {
+    "node": ">=8.0.0",
+    "npm": ">=5.0.0"
+  },
+  "dependencies": {
+    "circuit-state": "^1.0.0",
+    "cuid": "^2.0.0",
+    "debug": "^4.0.0",
+    "hoek": "^6.0.0",
+    "individual": "^3.0.0",
+    "joi": "^14.0.0",
+    "wreck": "^14.2.0"
+  },
+  "devDependencies": {
+    "autocannon": "^3.1.0",
+    "chai": "^4.1.2",
+    "eslint": "^5.15.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "good": "^8.1.1",
+    "good-console": "^8.0.0",
+    "hapi": "^17.7.0",
+    "mocha": "^6.0.0",
+    "nock": "^10.0.0",
+    "nyc": "^13.0.0",
+    "proxyquire": "^2.1.0",
+    "sinon": "^7.0.0"
+  }
+}

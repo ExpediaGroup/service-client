@@ -1,0 +1,13 @@
+Running 20s test @ http://localhost:8081/
+10 connections
+
+Stat    2.5%  50%   97.5% 99%    Avg      Stdev    Max       
+Latency 50 ms 57 ms 94 ms 152 ms 60.19 ms 21.06 ms 461.02 ms 
+
+Stat      1%      2.5%    50%     97.5%   Avg     Stdev   Min     
+Req/Sec   125     125     169     180     164.9   12.96   125     
+Bytes/Sec 12.6 kB 12.6 kB 17.1 kB 18.2 kB 16.7 kB 1.31 kB 12.6 kB 
+
+Req/Bytes counts sampled once per second.
+
+3k requests in 20s, 333 kB read
