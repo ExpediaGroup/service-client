@@ -41,6 +41,7 @@ examples
 *.sublime-workspace
 *.sublime-project
 .editorconfig
+.github
 
 ehthumbs.db
 Icon?
