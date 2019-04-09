@@ -6,8 +6,11 @@
     * [More Examples](#more-examples)
 * [API](#api)
     * [Global Defaults](#global-defaults)
-    * [`ServiceClient.create(servicename, overrides)`](#serviceclientcreateservicename-overrides)
-    * [`ServiceClient.read(response, options)`](#serviceclientreadresponse-options)
+    * [`ServiceClient.create(servicename, [overrides])`](#serviceclientcreateservicename-overrides)
+    * [`ServiceClient.read(response, [options])`](#serviceclientreadresponse-options)
+    * [`ServiceClient.toReadableStream(payload, [encoding])`](#serviceclienttoreadablestreampayload-encoding)
+    * [`ServiceClient.parseCacheControl(field)`](#serviceclientparsecachecontrolfield)
+    * [`ServiceClient.agents`](#serviceclientagents)
     * [`ServiceClient.mergeConfig({})`](#serviceclientmergeconfig)
     * [`ServiceClient.use([])`](#serviceclientuse)
     * [ServiceClient instance](#serviceclient-instance)
@@ -85,7 +88,7 @@ For a more thorough collection of examples see the [examples directory](https://
 
 ***
 
-### `ServiceClient.create(servicename, overrides)`
+### `ServiceClient.create(servicename, [overrides])`
 
 Returns a new service client instance for `servicename` with optional `overrides` to the global defaults listed above:
 
@@ -106,9 +109,21 @@ Returns a new service client instance for `servicename` with optional `overrides
     - **secureContextOptions** - Instead of passing `secureContext` here, pass options to initialize `secureContext` internally. See [tls.createSecureContext()](https://nodejs.org/docs/latest-v8.x/api/tls.html#tls_tls_createsecurecontext_options) options.
 - **plugins** - Configuration object for [ServiceClient plugins](#plugins).
 
-### `ServiceClient.read(response, options)`
+### `ServiceClient.read(response, [options])`
 
-This is a proxy to Wreck.read() - for different options and details please see [Wreck docs](https://github.com/hapijs/wreck#readresponse-options).
+This is a proxy to `Wreck.read()` - for further details please see [Wreck.read()](https://github.com/hapijs/wreck#readresponse-options).
+
+### `ServiceClient.toReadableStream(payload, [encoding])`
+
+This is a proxy to `Wreck.toReadableStream()` - for further details please see [Wreck.toReadableStream()](https://github.com/hapijs/wreck#toreadablestreampayload-encoding).
+
+### `ServiceClient.parseCacheControl(field)`
+
+This is a proxy to `Wreck.parseCacheControl()` - for further details please see [Wreck.parseCacheControl()](https://github.com/hapijs/wreck#parsecachecontrolfield).
+
+### `ServiceClient.agents`
+
+This is a proxy to `Wreck.agents` - for further details please see [Wreck.agents](https://github.com/hapijs/wreck#agents).
 
 ### `ServiceClient.mergeConfig({})`
 

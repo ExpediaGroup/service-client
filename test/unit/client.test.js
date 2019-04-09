@@ -228,6 +228,21 @@ describe('client', function () {
       assert.equal(client.stats.executions, 1, 'is executions.')
     })
 
+    it('should make a successful request using params expected by `Wreck.request()`', async function () {
+      Nock('http://myservice.service.local:80')
+        .get('/v1/test/stuff')
+        .reply(200, { message: 'success' })
+
+      const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
+
+      const response = await client.request('GET', '/v1/test/stuff', { operation: 'GET_v1_test_stuff' })
+
+      assert.ok(response, 'is response.')
+      assert.equal(response.statusCode, 200, 'is ok response.')
+      assert.ok(response.payload, 'is body')
+      assert.equal(client.stats.executions, 1, 'is executions.')
+    })
+
     it('should make a successful request with `pathParams`', async function () {
       Nock('http://myservice.service.local:80')
         .get('/v1/test/stuff/123')
