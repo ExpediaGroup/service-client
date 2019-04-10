@@ -1,6 +1,7 @@
 'use strict'
 
 const EventEmitter = require('events')
+const { IncomingMessage } = require('http')
 const Nock = require('nock')
 const Hoek = require('hoek')
 const { assert } = require('chai')
@@ -190,7 +191,7 @@ describe('client', function () {
     })
   })
 
-  describe('service-client requests', () => {
+  describe('service-client request', () => {
     it('should throw an error if requesting without an `operation`', async function () {
       const client = ServiceClient.create('myservice', { hostname: 'vrbo.com' })
 
@@ -221,21 +222,6 @@ describe('client', function () {
       const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
 
       const response = await client.request({ method: 'GET', path: '/v1/test/stuff', operation: 'GET_v1_test_stuff' })
-
-      assert.ok(response, 'is response.')
-      assert.equal(response.statusCode, 200, 'is ok response.')
-      assert.ok(response.payload, 'is body')
-      assert.equal(client.stats.executions, 1, 'is executions.')
-    })
-
-    it('should make a successful request using params expected by `Wreck.request()`', async function () {
-      Nock('http://myservice.service.local:80')
-        .get('/v1/test/stuff')
-        .reply(200, { message: 'success' })
-
-      const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
-
-      const response = await client.request('GET', '/v1/test/stuff', { operation: 'GET_v1_test_stuff' })
 
       assert.ok(response, 'is response.')
       assert.equal(response.statusCode, 200, 'is ok response.')
@@ -309,6 +295,22 @@ describe('client', function () {
       } catch (err) {
         assert.ok(err, 'is error')
       }
+    })
+  })
+
+  describe('service-client read', () => {
+    it('should read the response payload', async function () {
+      Nock('http://myservice.service.local:80')
+        .get('/v1/test/stuff')
+        .reply(200, { message: 'success' })
+
+      const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
+
+      const response = await client.request({ method: 'GET', path: '/v1/test/stuff', operation: 'GET_v1_test_stuff', read: false })
+      assert.instanceOf(response, IncomingMessage)
+
+      const payload = await client.read(response, { json: true })
+      assert.deepEqual(payload, { message: 'success' })
     })
   })
 

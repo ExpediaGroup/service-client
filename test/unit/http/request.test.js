@@ -10,7 +10,7 @@ const Sinon = require('sinon')
 const Wreck = require('wreck')
 const { assert } = require('chai')
 
-const Request = require('../../lib/request')
+const Request = require('../../../lib/http/request')
 
 describe('request', () => {
   let suite
@@ -317,8 +317,8 @@ describe('request', () => {
 
     before(() => {
       httpsServer = Https.createServer({
-        key: Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'key.pem')),
-        cert: Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'cert.pem')),
+        key: Fs.readFileSync(Path.join(__dirname, '..', '..', 'fixtures', 'key.pem')),
+        cert: Fs.readFileSync(Path.join(__dirname, '..', '..', 'fixtures', 'cert.pem')),
         passphrase: 'passphrase'
       }, (req, res) => {
         res.writeHead(200)
