@@ -6,8 +6,8 @@
     * [More Examples](#more-examples)
 * [API](#api)
     * [Global Defaults](#global-defaults)
-    * [`ServiceClient.create(servicename, overrides)`](#serviceclientcreateservicename-overrides)
-    * [`ServiceClient.read(response, options)`](#serviceclientreadresponse-options)
+    * [`ServiceClient.create(servicename, [overrides])`](#serviceclientcreateservicename-overrides)
+    * [`ServiceClient.read(response, [options])`](#serviceclientreadresponse-options)
     * [`ServiceClient.mergeConfig({})`](#serviceclientmergeconfig)
     * [`ServiceClient.use([])`](#serviceclientuse)
     * [ServiceClient instance](#serviceclient-instance)
@@ -85,7 +85,7 @@ For a more thorough collection of examples see the [examples directory](https://
 
 ***
 
-### `ServiceClient.create(servicename, overrides)`
+### `ServiceClient.create(servicename, [overrides])`
 
 Returns a new service client instance for `servicename` with optional `overrides` to the global defaults listed above:
 
@@ -106,9 +106,23 @@ Returns a new service client instance for `servicename` with optional `overrides
     - **secureContextOptions** - Instead of passing `secureContext` here, pass options to initialize `secureContext` internally. See [tls.createSecureContext()](https://nodejs.org/docs/latest-v8.x/api/tls.html#tls_tls_createsecurecontext_options) options.
 - **plugins** - Configuration object for [ServiceClient plugins](#plugins).
 
-### `ServiceClient.read(response, options)`
+### `ServiceClient.read(response, [options])`
 
-This is a proxy to Wreck.read() - for different options and details please see [Wreck docs](https://github.com/hapijs/wreck#readresponse-options).
+Returns a promise that resolves into the payload in the form of a Buffer or (optionally) parsed JavaScript object (JSON).
+
+- **response** - An HTTP Incoming Message object
+- **options** - A configuration object
+    - **timeout** - The number of milliseconds to wait while reading data before
+    aborting handling of the response. Defaults to unlimited.
+    - **json** - A value indicating how to try to parse the payload as JSON. Defaults to `undefined` meaning no parse logic.
+        - **true**, 'smart' - Only try `JSON.parse` if the response indicates a JSON content-type.
+        - **strict** - As 'smart', except returns an error for non-JSON content-type.
+        - **force** - Try `JSON.parse` regardless of the content-type header.
+    - **gunzip** - A value indicating the behavior to adopt when the payload is gzipped. Defaults to `undefined` meaning no gunzipping.
+        - **true** - Only try to gunzip if the response indicates a gzip content-encoding.
+        - **false** - Explicitly disable gunzipping.
+        - **force** - Try to gunzip regardless of the content-encoding header.
+    - **maxBytes** - The maximum allowed response payload size. Defaults to unlimited.
 
 ### `ServiceClient.mergeConfig({})`
 
@@ -132,30 +146,32 @@ An instance returned by `ServiceClient.create()`.
 #### Methods
 
 - **`config(chain, options)`** - Read the configuration provided for the client. See [`Hoek.reach()`](https://github.com/hapijs/hoek/blob/master/API.md#reachobj-chain-options).
-    - **chain** - object path syntax to the property you want.
-    - **options** - options to pass to [`Hoek.reach()`](https://github.com/hapijs/hoek/blob/master/API.md#reachobj-chain-options).
+    - **chain** - Object path syntax to the property you want.
+    - **options** - Options to pass to [`Hoek.reach()`](https://github.com/hapijs/hoek/blob/master/API.md#reachobj-chain-options).
 - **`request(options)`** - Makes an http request.
-    - **method** - the HTTP method.
-    - **path** - defaults to `'/'`.
-    - **queryParams** - object containing key-value query parameter values.
-    - **pathParams** - object containing key-value path parameters to replace `{someKey}` value in path with.
-    - **headers** - object containing key-value pairs of headers.
-    - **payload** - the payload to send, if any.
-    - **redirects** - the number of redirects to allow.
-    - **operation** - the unique name for this endpoint request (default example: `GET` `/v1/supply/properties/austin` -> `GET_v1_supply_properties`).
-    - **timeout** - the timeout for this request.
-    - **connectTimeout** - the connection timeout for this request.
-    - **maxConnectRetry** - on `connectionTimeout` elapsed, how many attempts to retry connection.
-    - **maxBytes** - maximum size for response payload.
-    - **agent** - an optional custom agent for this request.
-    - **read** - whether or not to read the response (default: `true`).
-    - **readOptions** - options for reading the response payload. See [Wreck.read()](https://github.com/hapijs/wreck#readresponse-options).
-        - **timeout** - defaults to `20000`
-        - **json** - defaults to `true`
-        - **gunzip** - defaults to `false`
-        - **maxBytes** - no default
-    - **context** - the upstream request object (usually just a Hapi `request` or `server` object) to be passed to each hook.
-    - **plugins** - the request-specific configuration object for service client plugins.
+    - **method** - The HTTP method.
+    - **path** - Defaults to `'/'`.
+    - **queryParams** - Object containing key-value query parameter values.
+    - **pathParams** - Object containing key-value path parameters to replace `{someKey}` value in path with.
+    - **headers** - Object containing key-value pairs of headers.
+    - **payload** - The payload to send, if any.
+    - **redirects** - The number of redirects to allow.
+    - **operation** - The unique name for this endpoint request (default example: `GET` `/v1/supply/properties/austin` -> `GET_v1_supply_properties`). Required.
+    - **timeout** - The timeout for this request.
+    - **connectTimeout** - The connection timeout for this request.
+    - **maxConnectRetry** - On `connectionTimeout` elapsed, how many attempts to retry connection.
+    - **maxBytes** - Maximum size for response payload.
+    - **agent** - An optional custom agent for this request.
+    - **read** - Whether or not to read the response (default: `true`).
+    - **readOptions** - Options for reading the response payload. See [`ServiceClient.read()`](#serviceclientreadresponse-options).
+        - **timeout** - Defaults to `20000`
+        - **json** - Defaults to `true`
+        - **gunzip** - Defaults to `false`
+        - **maxBytes** - No default
+    - **context** - The upstream request object (usually just a Hapi `request` or `server` object) to be passed to each hook.
+    - **plugins** - The request-specific configuration object for service client plugins.
+
+- **`read(response, [options])`** - Read the response payload. See the documentation for [`ServiceClient.read()`](#serviceclientreadresponse-options).
 
 ***
 

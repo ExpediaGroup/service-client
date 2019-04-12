@@ -21,7 +21,7 @@
     "eslint": "eslint lib test",
     "mocha": "mocha test/unit/*.js test/unit/**/*.js",
     "nyc": "nyc --reporter=text --reporter=text-summary --reporter=html --report-dir=docs/reports/coverage npm run mocha",
-    "postnyc": "nyc check-coverage --statements 98 --branches 95 --functions 100 --lines 98"
+    "postnyc": "nyc check-coverage --statements 99 --branches 95 --functions 100 --lines 98"
   },
   "repository": {
     "type": "git",

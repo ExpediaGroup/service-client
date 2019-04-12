@@ -1,5 +1,4 @@
 <!--- Provide a general summary of your changes in the Title above. -->
-<!--- Please prefix with a JIRA ticket if available. Ex: "ABC-123: Fixes bug" -->
 
 ## Description
 <!--- Describe your changes in detail -->
