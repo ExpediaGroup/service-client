@@ -1,27 +1,23 @@
 'use strict'
 
 const { assert } = require('chai')
-const Sinon = require('sinon')
-const Wreck = require('wreck')
+const Nock = require('nock')
 
 const ServiceClient = require('../../lib/index')
 
 describe('ServiceClient', function () {
-  describe('read', function () {
-    it('should call Wreck.read', async function () {
-      Sinon.stub(Wreck, 'read')
-      await ServiceClient.read()
-      Sinon.assert.calledOnce(Wreck.read)
-      Wreck.read.restore()
-    })
+  describe('read()', async function () {
+    it('should export the read function', async function () {
+      Nock('http://myservice.service.local:80')
+        .get('/v1/test/stuff')
+        .reply(200, { message: 'success' })
 
-    it('should call Wreck.read and pass in the provided `response` and `options` arguments', async function () {
-      Sinon.stub(Wreck, 'read')
-      await ServiceClient.read({ complete: true }, { json: true })
-      Sinon.assert.calledOnce(Wreck.read)
-      assert.equal(true, Wreck.read.getCall(0).args[0].complete)
-      assert.equal(true, Wreck.read.getCall(0).args[1].json)
-      Wreck.read.restore()
+      const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
+
+      const response = await client.request({ method: 'GET', path: '/v1/test/stuff', operation: 'GET_v1_test_stuff', read: false })
+      const payload = await ServiceClient.read(response, { json: true })
+
+      assert.deepEqual(payload, { message: 'success' })
     })
   })
 })
