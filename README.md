@@ -1,8 +1,19 @@
 # @vrbo/service-client
+![travis-ci-badge](https://travis-ci.org/homeaway/service-client.svg?branch=master)
 
-* [Introduction](#introduction)
-* [Examples](#examples)
-    * [Basic Usage](#basic-usage)
+A general purpose HTTP client built with extensibility in mind.
+
+## Features:
+* uses [`wreck`](https://github.com/hapijs/wreck) underneath the covers
+* circuit breaking ([`circuit-state`](https://github.com/tlivings/circuit-state))
+* extensible with lifecycle hooks ([see Plugins section](#plugins))
+* dynamic hostname resolution
+* creates secure context
+* promise based - no callbacks
+
+## Contents
+* [Installation](#installation)
+* [Usage](#usage)
     * [More Examples](#more-examples)
 * [API](#api)
     * [Global Defaults](#global-defaults)
@@ -20,15 +31,7 @@
 * [Development](#development)
 * [Further Reading](#further-reading)
 
-## Introduction
-A general purpose http client built with extensibility in mind. It also features lifecycle hooks, dynamic hostname resolution, and circuit breaking.
-
-Principal features:
-* uses [`wreck`](https://github.com/hapijs/wreck) underneath the covers
-* circuit breaking ([`circuit-state`](https://github.com/tlivings/circuit-state))
-* extensible with hooks ([see Plugins section](#plugins))
-* creates secure context
-* promise based - no callbacks
+---
 
 ## Installation
 
@@ -36,9 +39,7 @@ Principal features:
 npm install @vrbo/service-client
 ```
 
-## Examples
-
-### Basic Usage
+## Usage
 
 ```javascript
 const ServiceClient = require('@vrbo/service-client')
@@ -67,7 +68,7 @@ try {
 
 For a more thorough collection of examples see the [examples directory](https://github.com/homeaway/service-client/tree/master/examples).
 
-***
+---
 
 ## API
 
@@ -83,7 +84,7 @@ For a more thorough collection of examples see the [examples directory](https://
     - **keepAlive** - Defaults to `true`.
     - **keepAliveMsecs** - Defaults to `30000`.
 
-***
+---
 
 ### `ServiceClient.create(servicename, [overrides])`
 
@@ -132,7 +133,7 @@ Merges and overrides configuration with the global ServiceClient config.
 
 Globally registers plugins. A helper function for calling `ServiceClient.mergeConfig({plugins: []})`. See [plugins](#plugins).
 
-***
+---
 
 ### ServiceClient instance
 
@@ -173,7 +174,7 @@ An instance returned by `ServiceClient.create()`.
 
 - **`read(response, [options])`** - Read the response payload. See the documentation for [`ServiceClient.read()`](#serviceclientreadresponse-options).
 
-***
+---
 
 ## Plugins
 Service-Client plugins provide the ability to hook into different spots of a request's lifecycle, and in some hooks, await some asynchronous action.
