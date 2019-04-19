@@ -27,6 +27,9 @@
     "type": "git",
     "url": "https://github.com/homeaway/service-client.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "bugs": {
     "url": "https://github.com/homeaway/service-client/issues"
   },
