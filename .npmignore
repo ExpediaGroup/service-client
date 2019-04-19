@@ -53,3 +53,5 @@ Thumbs.db
 tools
 Makefile
 Todo.md
+.travis.yml
+.nyc_output
