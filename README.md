@@ -1,7 +1,8 @@
 # @vrbo/service-client
-[![npm version](https://img.shields.io/npm/v/@vrbo/service-client.svg?style=flat-square)](https://www.npmjs.com/package/@vrbo/service-client)
-[![travis-ci-badge](https://travis-ci.org/homeaway/service-client.svg?branch=master)](https://travis-ci.org/homeaway/service-client)
-[![npm downloads](https://img.shields.io/npm/dm/@vrbo/service-client.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@vrbo/service-client)
+[![NPM Version](https://img.shields.io/npm/v/@vrbo/service-client.svg?style=flat-square)](https://www.npmjs.com/package/@vrbo/service-client)
+[![Build Status](https://travis-ci.org/homeaway/service-client.svg?branch=master)](https://travis-ci.org/homeaway/service-client)
+[![Dependency Status](https://david-dm.org/homeaway/service-client.svg?theme=shields.io)](https://david-dm.org/homeaway/service-client)
+[![NPM Downloads](https://img.shields.io/npm/dm/@vrbo/service-client.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@vrbo/service-client)
 
 A general purpose HTTP client built with extensibility in mind.
 
