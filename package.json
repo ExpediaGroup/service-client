@@ -2,6 +2,7 @@
   "name": "@vrbo/service-client",
   "version": "1.0.0",
   "description": "A general purpose http client built with extensibility in mind. It also features lifecycle hooks, dynamic hostname resolution, and circuit breaking.",
+  "keywords": ["http", "client", "service", "circuit", "breaking", "hooks", "node", "utility", "fetch", "request", "get", "post", "vrbo", "homeaway", "expedia"],
   "license": "Apache-2.0",
   "author": {
     "name": "Expedia Group",
