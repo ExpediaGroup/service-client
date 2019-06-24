@@ -189,6 +189,11 @@ describe('client', function () {
     it('should merge an empty external config into the global config without error', function () {
       assert.doesNotThrow(() => ServiceClient.mergeConfig())
     })
+
+    it('should throw an error when constructor not given a service name', () => {
+      const SC = require('../../lib/client')
+      assert.throws(() => new SC(), 'A service name is required')
+    })
   })
 
   describe('service-client request', () => {
@@ -249,6 +254,17 @@ describe('client', function () {
       const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
 
       const response = await client.request({ method: 'GET', path: '/v1/test/stuff', queryParams: { id: '123' }, operation: 'GET_v1_test_stuff' })
+
+      assert.equal(response.statusCode, 200, 'is ok.')
+    })
+
+    it('should make a successful request with `hostPrefix`', async function () {
+      Nock('http://prefix.myservice.service.local:80')
+        .get('/v1/test/stuff?id=123')
+        .reply(200, { message: 'success' })
+
+      const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
+      const response = await client.request({ method: 'GET', path: '/v1/test/stuff', queryParams: { id: '123' }, operation: 'GET_v1_test_stuff', hostPrefix: 'prefix' })
 
       assert.equal(response.statusCode, 200, 'is ok.')
     })

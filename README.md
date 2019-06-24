@@ -154,6 +154,7 @@ An instance returned by `ServiceClient.create()`.
     - **options** - Options to pass to [`Hoek.reach()`](https://github.com/hapijs/hoek/blob/master/API.md#reachobj-chain-options).
 - **`request(options)`** - Makes an http request.
     - **method** - The HTTP method.
+    - **hostPrefix** - A base prefix that gets prepended to the hostname.
     - **path** - Defaults to `'/'`.
     - **queryParams** - Object containing key-value query parameter values.
     - **pathParams** - Object containing key-value path parameters to replace `{someKey}` value in path with.
