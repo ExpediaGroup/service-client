@@ -1,6 +1,6 @@
 {
   "name": "@vrbo/service-client",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A general purpose http client built with extensibility in mind. It also features lifecycle hooks, dynamic hostname resolution, and circuit breaking.",
   "keywords": [
     "http",
