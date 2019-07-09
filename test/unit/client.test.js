@@ -296,6 +296,21 @@ describe('client', function () {
       assert.instanceOf(response.payload, Buffer)
     })
 
+    it('should NOT parse a response, even with json content-type headers', async function () {
+      Nock('http://myservice.service.local:80')
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json'
+        })
+        .get('/v1/test/stuff')
+        .reply(200, 'this-is-not-json')
+
+      const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
+
+      const response = await client.request({ method: 'GET', path: '/v1/test/stuff', operation: 'GET_v1_test_stuff', readOptions: { json: false } })
+
+      assert.equal(response.payload, 'this-is-not-json')
+    })
+
     it('should throw an error when attempting to parse a payload that is expected to be JSON', async function () {
       Nock('http://myservice.service.local:80')
         .defaultReplyHeaders({
