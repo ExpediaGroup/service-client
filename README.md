@@ -118,9 +118,10 @@ Returns a promise that resolves into the payload in the form of a Buffer or (opt
 - **options** - A configuration object
     - **timeout** - The number of milliseconds to wait while reading data before
     aborting handling of the response. Defaults to unlimited.
-    - **json** - A value indicating how to try to parse the payload as JSON. Defaults to `undefined` meaning no parse logic.
-        - **true**, 'smart' - Only try `JSON.parse` if the response indicates a JSON content-type.
-        - **strict** - As 'smart', except returns an error for non-JSON content-type.
+    - **json** - A value indicating how to try to parse the payload as JSON. Defaults to `true`.
+        - **true** - Only try `JSON.parse` if the response indicates a JSON content-type.
+        - **false** - Do not try `JSON.parse` on the response at all.
+        - **strict** - Same as `true`, except throws an error for non-JSON content-type.
         - **force** - Try `JSON.parse` regardless of the content-type header.
     - **gunzip** - A value indicating the behavior to adopt when the payload is gzipped. Defaults to `undefined` meaning no gunzipping.
         - **true** - Only try to gunzip if the response indicates a gzip content-encoding.
