@@ -37,7 +37,7 @@
     "test": "npm run eslint && npm run nyc",
     "eslint": "eslint lib test",
     "mocha": "mocha test/unit/*.js test/unit/**/*.js",
-    "nyc": "nyc --reporter=text --reporter=text-summary --reporter=html --report-dir=docs/reports/coverage npm run mocha",
+    "nyc": "nyc --reporter=text --reporter=text-summary --reporter=lcov --report-dir=docs/reports/coverage npm run mocha",
     "postnyc": "nyc check-coverage --statements 100 --branches 97 --functions 100 --lines 100"
   },
   "repository": {
