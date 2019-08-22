@@ -37,12 +37,121 @@ describe('Hooks', () => {
         () => plugin2
       )
 
-      const options = {}
-      const result = await Hooks.init(options)
+      const hookOptions = {
+        client: {
+          config () {}
+        },
+        context: null,
+        plugins: {}
+      }
+      const result = await Hooks.init(hookOptions)
 
       assert.typeOf(result.request, 'function')
       assert.typeOf(result.init, 'function')
       assert.typeOf(result.response, 'function')
+    })
+
+    describe('per-request plugin options', function () {
+      beforeEach(function () {
+        suite.plugin1Stub = suite.sandbox.stub().returns({
+          request () {},
+          init () {}
+        })
+
+        suite.plugin2Stub = suite.sandbox.stub().returns({
+          request () {},
+          init () {}
+        })
+
+        GlobalConfig.plugins.push(
+          suite.plugin1Stub,
+          suite.plugin2Stub
+        )
+      })
+
+      it('should disable a configured plugin', async function () {
+        const hookOptions = {
+          client: {
+            config: () => ({
+              auth: {
+                clientId: '123',
+                clientSecret: 'abc'
+              }
+            })
+          },
+          context: null,
+          plugins: {
+            auth: false
+          }
+        }
+
+        await Hooks.init(hookOptions)
+
+        Sinon.assert.calledWith(suite.plugin1Stub, {
+          client: Sinon.match.any,
+          context: Sinon.match.any,
+          plugins: Sinon.match({
+            auth: false
+          })
+        })
+      })
+
+      it('should enable a disabled plugin', async function () {
+        const hookOptions = {
+          client: {
+            config: () => ({
+              foobar: false
+            })
+          },
+          context: null,
+          plugins: {
+            foobar: true
+          }
+        }
+
+        await Hooks.init(hookOptions)
+
+        Sinon.assert.calledWith(suite.plugin1Stub, {
+          client: Sinon.match.any,
+          context: Sinon.match.any,
+          plugins: Sinon.match({
+            foobar: true
+          })
+        })
+      })
+
+      it('should use options containing base and per-request config', async function () {
+        const hookOptions = {
+          client: {
+            config: () => ({
+              auth: {
+                clientId: '123',
+                clientSecret: 'abc'
+              }
+            })
+          },
+          context: null,
+          plugins: {
+            auth: {
+              initialRetry: true
+            }
+          }
+        }
+
+        await Hooks.init(hookOptions)
+
+        Sinon.assert.calledWith(suite.plugin1Stub, {
+          client: Sinon.match.any,
+          context: Sinon.match.any,
+          plugins: Sinon.match({
+            auth: {
+              clientId: '123',
+              clientSecret: 'abc',
+              initialRetry: true
+            }
+          })
+        })
+      })
     })
 
     it('should execute each added hook', async function () {
@@ -61,8 +170,14 @@ describe('Hooks', () => {
         () => plugin2
       )
 
-      const options = {}
-      const result = await Hooks.init(options)
+      const hookOptions = {
+        client: {
+          config () {}
+        },
+        context: null,
+        plugins: {}
+      }
+      const result = await Hooks.init(hookOptions)
 
       const data = { options: { foo: 'bar' } }
       result.request(data)
@@ -117,8 +232,14 @@ describe('Hooks', () => {
 
       const startTime = Date.now()
 
-      const options = {}
-      const result = await Hooks.init(options)
+      const hookOptions = {
+        client: {
+          config () {}
+        },
+        context: null,
+        plugins: {}
+      }
+      const result = await Hooks.init(hookOptions)
 
       const data = { options: { foo: 'bar' } }
       await result.request(data)
