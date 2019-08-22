@@ -69,7 +69,7 @@ describe('Hooks', () => {
         )
       })
 
-      it('should set per-request plugin options to false', async function () {
+      it('should disable a configured plugin', async function () {
         const hookOptions = {
           client: {
             config: () => ({
@@ -96,7 +96,7 @@ describe('Hooks', () => {
         })
       })
 
-      it('should set per-request plugin options to false', async function () {
+      it('should enable a disabled plugin', async function () {
         const hookOptions = {
           client: {
             config: () => ({
