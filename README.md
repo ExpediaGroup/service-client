@@ -31,6 +31,7 @@ A general purpose HTTP client built with extensibility in mind.
     * [Available Plugins](#available-plugins)
     * [Plugin structure](#plugin-structure)
     * [Writing your own plugin](#writing-your-own-plugin)
+* [Precautionary Notes](#precautionary-notes)
 * [Development](#development)
 * [Further Reading](#further-reading)
 
@@ -420,6 +421,9 @@ there was a request
 there was a response
 >
 ```
+
+## Precautionary Notes
+Any `content-length` header passed into the request options will be removed as a precaution against mismatching content-length values downstream. In the case of a non-buffer payload, this can occur if escape characters were taken into consideration when calculating the content length. This mismatch will result in the downstream service waiting for bytes that will never be sent. By removing the header, we defer to Wreck to calculate the correct content length.
 
 ## Development
 This package uses [`debug`](https://github.com/visionmedia/debug) for logging debug statements.

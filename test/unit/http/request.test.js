@@ -52,7 +52,8 @@ describe('request', () => {
 
     res.req = req
 
-    suite.sandbox.stub(Wreck, 'request').returns(res)
+    suite.requestStub = suite.sandbox.stub(Wreck, 'request')
+    suite.requestStub.returns(res)
 
     const deferred = getDeferred()
 
@@ -269,6 +270,44 @@ describe('request', () => {
     } catch (error) {
       assert.ok(error, 'is failed.')
     }
+  })
+
+  describe('`content-length` header', function () {
+    it('should strip the `content-length` header before passing the request options off to the http library', async function () {
+      suite.requestStub = suite.sandbox.stub(Wreck, 'request').resolves({})
+
+      await Request('POST', '/v1/test/stuff', {
+        baseUrl: 'http://service.local:80',
+        headers: { 'content-length': '9999999' },
+        payload: 'this-is-data'
+      })
+
+      Sinon.assert.calledWith(suite.requestStub, 'POST', '/v1/test/stuff', Sinon.match({
+        baseUrl: 'http://service.local:80',
+        headers: {},
+        payload: 'this-is-data',
+        id: Sinon.match.string
+      }))
+    })
+
+    it('should populate the `content-length` header with the correct payload size in the http library', async function () {
+      const nock = Nock('http://service.local:80', {
+        reqheaders: {
+          'host': 'service.local',
+          'content-length': 12
+        }
+      })
+        .post('/v1/test/stuff')
+        .reply(200, { message: 'success' })
+
+      await Request('POST', '/v1/test/stuff', {
+        baseUrl: 'http://service.local:80',
+        headers: { 'content-length': '9999999' },
+        payload: 'this-is-data'
+      })
+
+      assert.isTrue(nock.isDone())
+    })
   })
 
   describe('http real server', () => {
