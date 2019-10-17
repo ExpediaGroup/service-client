@@ -95,7 +95,7 @@ For a more thorough collection of examples see the [examples directory](https://
 Returns a new service client instance for `servicename` with optional `overrides` to the global defaults listed above:
 
 - **protocol** - The protocol to use for the request. Defaults to `"http:"`.
-- **hostname** - The hostname to use for the request. Accepts a string or a function that returns a string.
+- **hostname** - The hostname to use for the request. Accepts a `string` or a `function(serviceName, serviceConfig)` that returns a string.
 - **port** - The port number to use for the request.
 - **basePath** - The base path used to prefix every request path. This path should begin with a `/`.
 - **connectTimeout** - The connection timeout. Defaults to `1000`.
