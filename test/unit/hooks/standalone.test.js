@@ -29,7 +29,7 @@ describe('Using ServiceClient in a standalone context', () => {
     GlobalConfig.plugins = []
     suite.sandbox.restore()
     suite = null
-    ServiceClient.destroy('myservice')
+    ServiceClient.remove('myservice')
   })
 
   it('should call hooks (successful request)', async function () {

@@ -43,7 +43,7 @@ describe('Using ServiceClient in the context of a Hapi request', () => {
     GlobalConfig.plugins = []
     suite.sandbox.restore()
     suite = null
-    ServiceClient.destroy('myservice')
+    ServiceClient.remove('myservice')
   })
 
   it('should process requests that may be in flight simultaneously', async function () {

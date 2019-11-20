@@ -31,7 +31,7 @@ describe('Using ServiceClient in the context of a Hapi server', () => {
     GlobalConfig.plugins = []
     suite.sandbox.restore()
     suite = null
-    ServiceClient.destroy('myservice')
+    ServiceClient.remove('myservice')
   })
 
   it('should pass the server via `context` to the `request` hook', async function () {

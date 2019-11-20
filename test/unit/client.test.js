@@ -89,7 +89,7 @@ describe('client', function () {
     afterEach(() => {
       Object.assign(__serviceclientconfig, suite.originalConfig) // eslint-disable-line no-undef
       process.env = suite.originalEnvVars
-      ServiceClient.destroy('myservice')
+      ServiceClient.remove('myservice')
     })
 
     it('should throw an error if creating an instance without a service name', async () => {
@@ -199,7 +199,7 @@ describe('client', function () {
 
   describe('service-client request', () => {
     afterEach(() => {
-      ServiceClient.destroy('myservice')
+      ServiceClient.remove('myservice')
     })
 
     it('should throw an error if requesting without an `operation`', async function () {
@@ -336,7 +336,7 @@ describe('client', function () {
 
   describe('service-client read', () => {
     afterEach(() => {
-      ServiceClient.destroy('myservice')
+      ServiceClient.remove('myservice')
     })
 
     it('should read the response payload', async function () {
@@ -356,7 +356,7 @@ describe('client', function () {
 
   describe('connectTimeout and circuit breaker', () => {
     afterEach(() => {
-      ServiceClient.destroy('myservice')
+      ServiceClient.remove('myservice')
     })
 
     it('should fail the request because `connectTimeout` is short', async function () {
@@ -423,7 +423,7 @@ describe('client', function () {
 
   describe('timeout and circuit breaker', () => {
     afterEach(() => {
-      ServiceClient.destroy('myservice')
+      ServiceClient.remove('myservice')
     })
 
     it('should fail the request because `timeout` is short and the circuit breaker should trip', async function () {
@@ -456,7 +456,7 @@ describe('client', function () {
 
   describe('circuit breaker and hooks', () => {
     afterEach(() => {
-      ServiceClient.destroy('myservice')
+      ServiceClient.remove('myservice')
     })
 
     it('should execute `error`, `stats`, and `end` hooks if the circuit breaker is open', async function () {
