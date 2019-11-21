@@ -1,7 +1,7 @@
 # @vrbo/service-client
 [![NPM Version](https://img.shields.io/npm/v/@vrbo/service-client.svg?style=flat-square)](https://www.npmjs.com/package/@vrbo/service-client)
-[![Build Status](https://travis-ci.org/homeaway/service-client.svg?branch=master)](https://travis-ci.org/homeaway/service-client)
-[![Dependency Status](https://david-dm.org/homeaway/service-client.svg?theme=shields.io)](https://david-dm.org/homeaway/service-client)
+[![Build Status](https://travis-ci.org/expediagroup/service-client.svg?branch=master)](https://travis-ci.org/expediagroup/service-client)
+[![Dependency Status](https://david-dm.org/expediagroup/service-client.svg?theme=shields.io)](https://david-dm.org/expediagroup/service-client)
 [![NPM Downloads](https://img.shields.io/npm/dm/@vrbo/service-client.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@vrbo/service-client)
 
 A general purpose HTTP client built with extensibility in mind.
@@ -70,7 +70,7 @@ try {
 
 ### More Examples
 
-For a more thorough collection of examples see the [examples directory](https://github.com/homeaway/service-client/tree/master/examples).
+For a more thorough collection of examples see the [examples directory](https://github.com/expediagroup/service-client/tree/master/examples).
 
 ---
 
@@ -224,7 +224,7 @@ ServiceClient.use([
 
 ### Available Plugins
 
-* [`statsd`](https://github.com/homeaway/service-client-statsd)
+* [`statsd`](https://github.com/expediagroup/service-client-statsd)
 
 ### Plugin structure
 ```js
