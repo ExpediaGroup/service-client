@@ -1,5 +1,12 @@
-## [1.2.1](https://github.com/expediagroup/service-client/compare/v1.2.0...v1.2.1) (2019-08-22)
+## [1.3.0](https://github.com/expediagroup/service-client/compare/v1.2.1...v1.3.0) (2019-12-03)
 
+#### Feature
+
+* Caches a client if one does not already exist
+* Returns a cached client if already generated
+
+
+## [1.2.1](https://github.com/expediagroup/service-client/compare/v1.2.0...v1.2.1) (2019-08-22)
 
 #### Bug Fixes
 

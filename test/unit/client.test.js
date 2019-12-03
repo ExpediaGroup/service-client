@@ -89,6 +89,7 @@ describe('client', function () {
     afterEach(() => {
       Object.assign(__serviceclientconfig, suite.originalConfig) // eslint-disable-line no-undef
       process.env = suite.originalEnvVars
+      ServiceClient.remove('myservice')
     })
 
     it('should throw an error if creating an instance without a service name', async () => {
@@ -194,9 +195,26 @@ describe('client', function () {
       const SC = require('../../lib/client')
       assert.throws(() => new SC(), 'A service name is required')
     })
+
+    it('should use a cached instance when no overrides provided', () => {
+      __serviceclientconfig.overrides.cachedservice = { hostname: 'cachedservice.service.local' } // eslint-disable-line no-undef
+
+      const client1 = ServiceClient.create('cachedservice')
+      const client2 = ServiceClient.create('cachedservice', {})
+      const client3 = ServiceClient.create('cachedservice', {
+        basePath: '/v1/test'
+      })
+
+      assert.equal(client1, client2, 'client2 is equal to client1 because its pulled from the cache')
+      assert.notEqual(client1, client3, 'client3 provides an override and is a new instance of service client')
+    })
   })
 
   describe('service-client request', () => {
+    afterEach(() => {
+      ServiceClient.remove('myservice')
+    })
+
     it('should throw an error if requesting without an `operation`', async function () {
       const client = ServiceClient.create('myservice', { hostname: 'vrbo.com' })
 
@@ -330,6 +348,10 @@ describe('client', function () {
   })
 
   describe('service-client read', () => {
+    afterEach(() => {
+      ServiceClient.remove('myservice')
+    })
+
     it('should read the response payload', async function () {
       Nock('http://myservice.service.local:80')
         .get('/v1/test/stuff')
@@ -346,6 +368,10 @@ describe('client', function () {
   })
 
   describe('connectTimeout and circuit breaker', () => {
+    afterEach(() => {
+      ServiceClient.remove('myservice')
+    })
+
     it('should fail the request because `connectTimeout` is short', async function () {
       const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local', connectTimeout: 1, maxFailures: 1 })
 
@@ -409,6 +435,10 @@ describe('client', function () {
   })
 
   describe('timeout and circuit breaker', () => {
+    afterEach(() => {
+      ServiceClient.remove('myservice')
+    })
+
     it('should fail the request because `timeout` is short and the circuit breaker should trip', async function () {
       Nock('http://myservice.service.local:80')
         .get('/v1/test/stuff')
@@ -438,6 +468,10 @@ describe('client', function () {
   })
 
   describe('circuit breaker and hooks', () => {
+    afterEach(() => {
+      ServiceClient.remove('myservice')
+    })
+
     it('should execute `error`, `stats`, and `end` hooks if the circuit breaker is open', async function () {
       Nock('http://myservice.service.local:80')
         .get('/v1/test/stuff')
