@@ -195,6 +195,19 @@ describe('client', function () {
       const SC = require('../../lib/client')
       assert.throws(() => new SC(), 'A service name is required')
     })
+
+    it('should use a cached instance when no overrides provided', () => {
+      __serviceclientconfig.overrides.cachedservice = { hostname: 'cachedservice.service.local' } // eslint-disable-line no-undef
+
+      const client1 = ServiceClient.create('cachedservice')
+      const client2 = ServiceClient.create('cachedservice', {})
+      const client3 = ServiceClient.create('cachedservice', {
+        basePath: '/v1/test'
+      })
+
+      assert.equal(client1, client2, 'client2 is equal to client1 because its pulled from the cache')
+      assert.notEqual(client1, client3, 'client3 provides an override and is a new instance of service client')
+    })
   })
 
   describe('service-client request', () => {
