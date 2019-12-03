@@ -2,7 +2,7 @@
 
 #### Feature
 
-* Caches a client if one does not already exists
+* Caches a client if one does not already exist
 * Returns a cached client if already generated
 
 
