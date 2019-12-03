@@ -94,6 +94,8 @@ For a more thorough collection of examples see the [examples directory](https://
 
 Returns a new service client instance for `servicename` with optional `overrides` to the global defaults listed above:
 
+*Note: If no `overrides` are provided, when a service client instance is created for a `servicename` it will be stored in a cache.  That instance will be returned instead of creating a new instance.*
+
 - **protocol** - The protocol to use for the request. Defaults to `"http:"`.
 - **hostname** - The hostname to use for the request. Accepts a `string` or a `function(serviceName, serviceConfig)` that returns a string.
 - **port** - The port number to use for the request.
