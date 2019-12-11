@@ -76,7 +76,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "good": "^8.1.1",
     "good-console": "^8.0.0",
-    "hapi": "^17.7.0",
+    "hapi": "^18.0.0",
     "mocha": "^6.0.0",
     "nock": "^10.0.0",
     "nyc": "^13.0.0",
