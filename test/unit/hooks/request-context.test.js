@@ -1,10 +1,10 @@
 'use strict'
 
-const Nock = require('nock')
 const Sinon = require('sinon')
-const Hapi = require('hapi')
-const HapiRequest = require('hapi/lib/request')
-const Wreck = require('wreck')
+const Nock = require('nock')
+const Hapi = require('@hapi/hapi')
+const HapiRequest = require('@hapi/hapi/lib/request')
+const Wreck = require('@hapi/wreck')
 
 const ServiceClient = require('../../../lib')
 const GlobalConfig = require('../../../lib/config')

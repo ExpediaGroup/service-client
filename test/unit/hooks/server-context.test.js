@@ -2,7 +2,7 @@
 
 const Nock = require('nock')
 const Sinon = require('sinon')
-const Hapi = require('hapi')
+const Hapi = require('@hapi/hapi')
 
 const ServiceClient = require('../../../lib')
 const GlobalConfig = require('../../../lib/config')

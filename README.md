@@ -99,7 +99,7 @@ Returns a new service client instance for `servicename` with optional `overrides
 - **protocol** - The protocol to use for the request. Defaults to `"http:"`.
 - **hostname** - The hostname to use for the request. Accepts a `string` or a `function(serviceName, serviceConfig)` that returns a string.
 - **port** - The port number to use for the request.
-- **basePath** - The base path used to prefix every request path. This path should begin with a `/`.
+- **basePath** - The base path used to prefix every request path. This path should end with a `/`.
 - **connectTimeout** - The connection timeout. Defaults to `1000`.
 - **maxConnectRetry** - After `connectTimeout` elapses, how many attempts to retry the connection. Defaults to `0`.
 - **timeout** - The number of ms to wait without receiving a response before aborting the request. Defaults to `10000`.
@@ -122,15 +122,15 @@ Returns a promise that resolves into the payload in the form of a Buffer or (opt
     - **timeout** - The number of milliseconds to wait while reading data before
     aborting handling of the response. Defaults to unlimited.
     - **json** - A value indicating how to try to parse the payload as JSON. Defaults to `true`.
-        - **true** - Only try `JSON.parse` if the response indicates a JSON content-type.
+        - **true** - Only try `JSON.parse` if the response indicates a JSON content-type. This is the default value.
         - **false** - Do not try `JSON.parse` on the response at all.
         - **strict** - Same as `true`, except throws an error for non-JSON content-type.
         - **force** - Try `JSON.parse` regardless of the content-type header.
-    - **gunzip** - A value indicating the behavior to adopt when the payload is gzipped. Defaults to `undefined` meaning no gunzipping.
+    - **gunzip** - A value indicating the behavior to adopt when the payload is gzipped. Defaults to `false` meaning no gunzipping.
         - **true** - Only try to gunzip if the response indicates a gzip content-encoding.
         - **false** - Explicitly disable gunzipping.
         - **force** - Try to gunzip regardless of the content-encoding header.
-    - **maxBytes** - The maximum allowed response payload size. Defaults to unlimited.
+    - **maxBytes** - The maximum allowed response payload size. Defaults to `0` (unlimited).
 
 ### `ServiceClient.mergeConfig({})`
 
@@ -159,7 +159,7 @@ An instance returned by `ServiceClient.create()`.
 - **`request(options)`** - Makes an http request.
     - **method** - The HTTP method.
     - **hostPrefix** - A base prefix that gets prepended to the hostname.
-    - **path** - Defaults to `'/'`.
+    - **path** - A leading `'/'` will override the client's configured `basePath`.
     - **queryParams** - Object containing key-value query parameter values.
     - **pathParams** - Object containing key-value path parameters to replace `{someKey}` value in path with.
     - **headers** - Object containing key-value pairs of headers.

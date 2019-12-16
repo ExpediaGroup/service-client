@@ -7,13 +7,13 @@ const ServiceClient = require('../..');
   const client = ServiceClient.create('reqres', {
     protocol: 'https:',
     hostname: 'reqres.in',
-    basePath: '/api'
+    basePath: '/api/'
   })
 
   // Submit a request
   const response = await client.request({
     method: 'GET',
-    path: '/users',
+    path: 'users',
     queryParams: { page: 2 },
     operation: 'GET_users_pg2'
   })

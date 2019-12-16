@@ -7,7 +7,7 @@ const Http = require('http')
 const Https = require('https')
 const Nock = require('nock')
 const Sinon = require('sinon')
-const Wreck = require('wreck')
+const Wreck = require('@hapi/wreck')
 const { assert } = require('chai')
 
 const Request = require('../../../lib/http/request')
