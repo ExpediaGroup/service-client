@@ -1,7 +1,7 @@
 'use strict'
 
 const Sinon = require('sinon')
-const Wreck = require('wreck')
+const Wreck = require('@hapi/wreck')
 const { assert } = require('chai')
 
 const Read = require('../../../lib/http/read')

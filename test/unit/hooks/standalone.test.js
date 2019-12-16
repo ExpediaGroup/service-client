@@ -3,7 +3,7 @@
 const EventEmitter = require('events')
 const Nock = require('nock')
 const Sinon = require('sinon')
-const Wreck = require('wreck')
+const Wreck = require('@hapi/wreck')
 const { assert } = require('chai')
 
 const ServiceClient = require('../../../lib')

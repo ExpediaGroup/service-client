@@ -3,10 +3,10 @@
 const EventEmitter = require('events')
 const { IncomingMessage } = require('http')
 const Nock = require('nock')
-const Hoek = require('hoek')
+const Hoek = require('@hapi/hoek')
 const { assert } = require('chai')
 const Sinon = require('sinon')
-const Wreck = require('wreck')
+const Wreck = require('@hapi/wreck')
 
 const ServiceClient = require('../../lib')
 const Hooks = require('../../lib/hooks')
@@ -153,9 +153,9 @@ describe('client', function () {
         .get('/v1/test/stuff')
         .reply(200, { message: 'success' })
 
-      const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local', basePath: '/v1/test' })
+      const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local', basePath: '/v1/test/' })
 
-      const response = await client.request({ method: 'GET', path: '/stuff', operation: 'GET_stuff' })
+      const response = await client.request({ method: 'GET', path: 'stuff', operation: 'GET_stuff' })
 
       assert.ok(response, 'is response.')
       assert.equal(response.statusCode, 200, 'is ok response.')
@@ -172,7 +172,7 @@ describe('client', function () {
         },
         overrides: {
           'myservice': {
-            basePath: '/api',
+            basePath: '/api/',
             hostname: 'myservice-test.us-east-1.aws'
           }
         }
@@ -183,7 +183,7 @@ describe('client', function () {
 
       assert.equal(clientConfig.connectTimeout, 9999, 'client config `connectTimeout` was overridden')
       assert.equal(clientConfig.timeout, 1234, 'client config `timeout` was overridden')
-      assert.equal(clientConfig.basePath, '/api', 'client config `basePath` was overridden')
+      assert.equal(clientConfig.basePath, '/api/', 'client config `basePath` was overridden')
       assert.equal(clientConfig.hostname, 'myservice-test.us-east-1.aws', 'client config `hostname` was overridden')
     })
 
@@ -202,7 +202,7 @@ describe('client', function () {
       const client1 = ServiceClient.create('cachedservice')
       const client2 = ServiceClient.create('cachedservice', {})
       const client3 = ServiceClient.create('cachedservice', {
-        basePath: '/v1/test'
+        basePath: '/v1/test/'
       })
 
       assert.equal(client1, client2, 'client2 is equal to client1 because its pulled from the cache')
