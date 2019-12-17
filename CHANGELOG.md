@@ -1,4 +1,4 @@
-## [2.0.0](https://github.com/expediagroup/service-client/compare/v1.3.0...v2.0.0)
+## [2.0.0](https://github.com/expediagroup/service-client/compare/v1.3.0...v2.0.0) (2019-12-17)
 
 ### Breaking
 
