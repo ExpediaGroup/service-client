@@ -171,7 +171,7 @@ describe('client', function () {
           timeout: 1234
         },
         overrides: {
-          'myservice': {
+          myservice: {
             basePath: '/api/',
             hostname: 'myservice-test.us-east-1.aws'
           }
