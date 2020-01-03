@@ -58,7 +58,7 @@
     "npm": ">=5.0.0"
   },
   "dependencies": {
-    "@hapi/hoek": "^8.5.0",
+    "@hapi/hoek": "^9.0.0",
     "@hapi/joi": "^16.1.7",
     "@hapi/wreck": "^16.0.1",
     "circuit-state": "^1.0.0",
