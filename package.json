@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "@hapi/hoek": "^8.5.0",
-    "@hapi/joi": "^16.1.7",
+    "@hapi/joi": "^17.0.0",
     "@hapi/wreck": "^16.0.1",
     "circuit-state": "^1.0.0",
     "cuid": "^2.0.0",
