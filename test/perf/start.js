@@ -5,7 +5,7 @@ const ChildProcess = require('child_process')
 
 async function start () {
   const dirs = Fs.readdirSync(__dirname)
-  for (let i in dirs) {
+  for (const i in dirs) {
     const name = dirs[i]
 
     const testDir = `${__dirname}/${name}`

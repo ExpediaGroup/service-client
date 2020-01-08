@@ -293,7 +293,7 @@ describe('request', () => {
     it('should populate the `content-length` header with the correct payload size in the http library', async function () {
       const nock = Nock('http://service.local:80', {
         reqheaders: {
-          'host': 'service.local',
+          host: 'service.local',
           'content-length': 12
         }
       })
@@ -331,7 +331,7 @@ describe('request', () => {
     })
 
     it('i can haz http request', async function () {
-      let called = {}
+      const called = {}
 
       const hooks = {
         socket () {
@@ -375,7 +375,7 @@ describe('request', () => {
     })
 
     it('i can haz https request', async function () {
-      let called = {}
+      const called = {}
 
       const hooks = {
         socket () {
