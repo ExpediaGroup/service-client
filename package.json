@@ -67,7 +67,7 @@
     "individual": "^3.0.0"
   },
   "devDependencies": {
-    "@hapi/good-console": "^8.0.0",
+    "@hapi/good-console": "^9.0.0",
     "@hapi/good": "^8.1.1",
     "@hapi/hapi": "^18.4.0",
     "autocannon": "^4.0.0",
