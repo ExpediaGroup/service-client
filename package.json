@@ -45,13 +45,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/expediagroup/service-client.git"
+    "url": "https://github.com/ExpediaGroup/service-client.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
   "bugs": {
-    "url": "https://github.com/expediagroup/service-client/issues"
+    "url": "https://github.com/ExpediaGroup/service-client/issues"
   },
   "engines": {
     "node": ">=8.0.0",
