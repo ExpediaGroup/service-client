@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/expediagroup/service-client/compare/v1.3.0...v1.3.1) (2020-02-20)
+
+#### Bug Fixes
+
+* Make client caching compatible with older global configs
+
+
 ## [1.3.0](https://github.com/expediagroup/service-client/compare/v1.2.1...v1.3.0) (2019-12-03)
 
 #### Feature
