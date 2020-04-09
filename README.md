@@ -1,6 +1,6 @@
 # @vrbo/service-client
 [![NPM Version](https://img.shields.io/npm/v/@vrbo/service-client.svg?style=flat-square)](https://www.npmjs.com/package/@vrbo/service-client)
-[![Build Status](https://travis-ci.org/expediagroup/service-client.svg?branch=master)](https://travis-ci.org/expediagroup/service-client)
+![](https://github.com/ExpediaGroup/service-client/workflows/Node_CI/badge.svg)
 [![Dependency Status](https://david-dm.org/expediagroup/service-client.svg?theme=shields.io)](https://david-dm.org/expediagroup/service-client)
 [![NPM Downloads](https://img.shields.io/npm/dm/@vrbo/service-client.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@vrbo/service-client)
 
