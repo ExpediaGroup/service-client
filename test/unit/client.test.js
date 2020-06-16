@@ -92,19 +92,25 @@ describe('client', function () {
       ServiceClient.remove('myservice')
     })
 
-    it('should throw an error if creating an instance without a service name', async () => {
+    it('should throw an error if creating an instance without a service name', () => {
       assert.throws(function () {
-        ServiceClient.create()
-      })
+        ServiceClient.create(undefined, { hostname: 'foobar' })
+      }, 'A service name is required')
     })
 
-    it('should assign a version to the client', async () => {
+    it('should throw an error if creating an instance without a hostname', () => {
+      assert.throws(function () {
+        ServiceClient.create('example-service')
+      }, '"hostname" is required. servicename=example-service')
+    })
+
+    it('should assign a version to the client', () => {
       const client = ServiceClient.create('myservice', { hostname: 'vrbo.com' })
 
       assert.isDefined(client._version)
     })
 
-    it('should fetch client configuration', async () => {
+    it('should fetch client configuration', () => {
       const client = ServiceClient.create('myservice', {
         hostname: 'vrbo.com',
         plugins: {
@@ -189,11 +195,6 @@ describe('client', function () {
 
     it('should merge an empty external config into the global config without error', function () {
       assert.doesNotThrow(() => ServiceClient.mergeConfig())
-    })
-
-    it('should throw an error when constructor not given a service name', () => {
-      const SC = require('../../lib/client')
-      assert.throws(() => new SC(), 'A service name is required')
     })
 
     it('should use a cached instance when no overrides provided', () => {
