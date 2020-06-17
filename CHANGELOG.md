@@ -1,3 +1,15 @@
+## [2.0.2](https://github.com/expediagroup/service-client/compare/v2.0.1...v2.0.2) (2020-06-14)
+
+#### Bug Fixes
+
+* Assert servicename upon client creation (#40)
+* Include servicename in validation errors (#40)
+
+#### Other
+
+* Update devDependency eslint to v7 (#37)
+* Switch to GH Actions for builds
+
 ## [2.0.1](https://github.com/expediagroup/service-client/compare/v2.0.0...v2.0.1) (2020-02-20)
 
 #### Bug Fixes
