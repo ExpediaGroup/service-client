@@ -1,3 +1,9 @@
+## [2.0.3](https://github.com/expediagroup/service-client/compare/v2.0.2...v2.0.3) (2020-07-09)
+
+#### Bug Fixes
+
+* Optimize client creation (#42)
+
 ## [2.0.2](https://github.com/expediagroup/service-client/compare/v2.0.1...v2.0.2) (2020-06-14)
 
 #### Bug Fixes
