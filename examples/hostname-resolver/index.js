@@ -6,7 +6,7 @@ const ServiceClient = require('../..');
   /**
    * A hostname resolver function. When the application is deployed
    * to production, return a mesh url. Otherwise, return a fully
-   * qualified url using the provided `region`, `env`, and `segment`.
+   * qualified url using the provided `region` and `env`.
    *
    * @param {string} serviceName The canonical name of our external service
    * @param {object} hostnameConfig A set of configuration options used to construct a url
@@ -17,10 +17,9 @@ const ServiceClient = require('../..');
     }
     const {
       region = process.env.AWS_REGION,
-      env = process.env.DEPLOY_ENV,
-      segment = process.env.SEGMENT
+      env = process.env.DEPLOY_ENV
     } = hostnameConfig
-    return `${serviceName}.${region}.${env}.${segment}.mywebsite.com`
+    return `${serviceName}.${region}.${env}.mywebsite.com`
   };
 
   /**
