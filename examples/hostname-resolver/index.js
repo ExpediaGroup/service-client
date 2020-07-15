@@ -5,11 +5,11 @@ const ServiceClient = require('../..');
 (async function start () {
   /**
    * A hostname resolver function. When the application is deployed
-   * to production, return a mesh url. Otherwise, return a fully
-   * qualified url using the provided `region` and `env`.
+   * to production, return a mesh hostname. Otherwise, return a fully
+   * qualified hostname using the provided `region` and `env`.
    *
    * @param {string} serviceName The canonical name of our external service
-   * @param {object} hostnameConfig A set of configuration options used to construct a url
+   * @param {object} hostnameConfig A set of configuration options used to construct a hostname
    */
   function hostnameResolver (serviceName, hostnameConfig = {}) {
     if (process.env.NODE_ENV === 'production') {
