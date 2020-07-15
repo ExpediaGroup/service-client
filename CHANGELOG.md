@@ -1,3 +1,9 @@
+## [2.1.0](https://github.com/expediagroup/service-client/compare/v2.0.2...v2.1.0) (2020-07-15)
+
+#### Feature
+
+* Add client config option `hostnameConfig` for passing custom config to a `hostname` resolver function (#43)
+
 ## [2.0.3](https://github.com/expediagroup/service-client/compare/v2.0.2...v2.0.3) (2020-07-09)
 
 #### Bug Fixes
