@@ -18,7 +18,7 @@ const ServiceClient = require('../..');
     const {
       region = process.env.AWS_REGION,
       env = process.env.DEPLOY_ENV,
-      segment = process.env.AWS_SEGMENT
+      segment = process.env.SEGMENT
     } = hostnameConfig
     return `${serviceName}.${region}.${env}.${segment}.mywebsite.com`
   };
