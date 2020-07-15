@@ -4,16 +4,15 @@ const ServiceClient = require('../..');
 
 (async function start () {
   /**
-   * A hostname resolver function.
-   * When the application is deployed to production, return a mesh url.
-   * Otherwise, return a fully qualified url using the provided `region`, `env`, and `segment`.
+   * A hostname resolver function. When the application is deployed
+   * to production, return a mesh url. Otherwise, return a fully
+   * qualified url using the provided `region`, `env`, and `segment`.
    *
    * @param {string} serviceName The canonical name of our external service
    * @param {object} hostnameConfig A set of configuration options used to construct a url
    */
-  function hostnameResolver(serviceName, hostnameConfig) {
+  function hostnameResolver (serviceName, hostnameConfig) {
     if (process.env.NODE_ENV === 'production') {
-      // return mesh url
       return `${serviceName}.service.local`
     }
     const { region, env, segment } = hostnameConfig
@@ -21,8 +20,9 @@ const ServiceClient = require('../..');
   };
 
   /**
-   * Configure service-client with some base settings and some individual overrides.
-   * This is helpful for organizing configuration in a place separate from where the client is created.
+   * Configure service-client with some base settings and some individual
+   * overrides. This is helpful for organizing configuration in a place
+   * separate from where the client is created.
    */
   ServiceClient.mergeConfig({
     base: {
