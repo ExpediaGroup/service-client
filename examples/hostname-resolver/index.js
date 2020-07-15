@@ -11,11 +11,15 @@ const ServiceClient = require('../..');
    * @param {string} serviceName The canonical name of our external service
    * @param {object} hostnameConfig A set of configuration options used to construct a url
    */
-  function hostnameResolver (serviceName, hostnameConfig) {
+  function hostnameResolver (serviceName, hostnameConfig = {}) {
     if (process.env.NODE_ENV === 'production') {
       return `${serviceName}.service.local`
     }
-    const { region, env, segment } = hostnameConfig
+    const {
+      region = process.env.AWS_REGION,
+      env = process.env.DEPLOY_ENV,
+      segment = process.env.AWS_SEGMENT
+    } = hostnameConfig
     return `${serviceName}.${region}.${env}.${segment}.mywebsite.com`
   };
 
@@ -28,9 +32,7 @@ const ServiceClient = require('../..');
     base: {
       hostname: hostnameResolver,
       hostnameConfig: {
-        region: process.env.AWS_REGION,
-        env: process.env.DEPLOY_ENV,
-        segment: process.env.AWS_SEGMENT
+        region: 'us-west-2'
       }
     },
     overrides: {
