@@ -137,6 +137,30 @@ describe('client', function () {
       assert.equal(client.stats.executions, 1, 'is executions.')
     })
 
+    it('should use the hostname function provided in the client config', async () => {
+      Nock('http://myservice-test.us-east-1.aws')
+        .get('/')
+        .reply(200, { message: 'success' })
+
+      const hostnameStub = suite.sandbox.stub().returns('myservice-test.us-east-1.aws')
+
+      const client = ServiceClient.create('myservice', {
+        hostname: hostnameStub,
+        hostnameConfig: {
+          foo: 'bar'
+        }
+      })
+
+      const response = await client.request({ method: 'GET', operation: 'GET_' })
+
+      assert.ok(response, 'is response.')
+      assert.equal(response.statusCode, 200, 'is ok response.')
+      assert.ok(response.payload, 'is body')
+      assert.equal(client.stats.executions, 1, 'is executions.')
+
+      Sinon.assert.calledWith(hostnameStub, 'myservice', Sinon.match({ foo: 'bar' }))
+    })
+
     it('should use the hostname string provided in the client config', async () => {
       __serviceclientconfig.overrides.myoverride = { hostname: 'myoverride.service.local' } // eslint-disable-line no-undef
 
@@ -191,6 +215,48 @@ describe('client', function () {
       assert.equal(clientConfig.timeout, 1234, 'client config `timeout` was overridden')
       assert.equal(clientConfig.basePath, '/api/', 'client config `basePath` was overridden')
       assert.equal(clientConfig.hostname, 'myservice-test.us-east-1.aws', 'client config `hostname` was overridden')
+    })
+
+    it('should merge hostnameConfig overrides with an external config and use it when creating a client', function () {
+      Nock('http://myservice-test.us-east-1.aws')
+        .get('/')
+        .reply(200, { message: 'success' })
+
+      const hostnameStub = suite.sandbox.stub().returns('myservice-test.us-east-1.aws')
+
+      ServiceClient.mergeConfig({
+        plugins: [],
+        base: {
+          hostname: hostnameStub,
+          hostnameConfig: {
+            foo: 'bar',
+            fizz: 'buzz',
+            beep: 'boop'
+          }
+        },
+        overrides: {
+          myservice: {
+            hostnameConfig: {
+              fizz: 'baz',
+              blerg: 'blarg'
+            }
+          }
+        }
+      })
+
+      const client = ServiceClient.create('myservice', {
+        hostnameConfig: {
+          beep: 'bop'
+        }
+      })
+      const clientConfig = client._config
+
+      assert.deepEqual(clientConfig.hostnameConfig, {
+        foo: 'bar',
+        fizz: 'baz',
+        blerg: 'blarg',
+        beep: 'bop'
+      })
     })
 
     it('should merge an empty external config into the global config without error', function () {
