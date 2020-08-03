@@ -1,4 +1,10 @@
-## [2.1.0](https://github.com/expediagroup/service-client/compare/v2.0.2...v2.1.0) (2020-07-15)
+## [2.1.1](https://github.com/expediagroup/service-client/compare/v2.1.0...v2.1.1) (2020-08-03)
+
+#### Fix
+
+* Prevent request options object mutation. ([#45](https://github.com/ExpediaGroup/service-client/pull/45))
+
+## [2.1.0](https://github.com/expediagroup/service-client/compare/v2.0.3...v2.1.0) (2020-07-15)
 
 #### Feature
 
