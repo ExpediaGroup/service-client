@@ -260,9 +260,10 @@ async function plugin({client, context, plugins}) {
     return {
 
         /**
-         * This hook is special. Data returned here will be deep merged with the
-         * request options data that will be passed on to Wreck. If you wanted
-         * to add headers to the request, this is where you would do it.
+         * This hook is special. The queryParams, pathParams, and headersData options
+         * are deep merged with a copy of the request options data that will be
+         * passed on to Wreck. All other data returned here will be shallow merged.
+         * If you wanted to add headers to the request, this is where you would do it.
          * (ex: return {headers: {'x-ha-blah': 'foobar'}})
          *
          * @param {object} data - data provided to the hook on every request

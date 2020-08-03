@@ -293,45 +293,75 @@ describe('Using ServiceClient in a standalone context', () => {
     assert.isAbove(Date.now() - startDate, 1, '5 hooks each take 200ms to process')
   })
 
-  it('should merge request options returned from each `request` hook', async function () {
+  describe('request hook', () => {
+    it('should merge request options returned from each `request` hook', async function () {
+      ServiceClient.use(() => {
+        return {
+          request () {
+            return {
+              fizz: 'buzz'
+            }
+          }
+        }
+      })
+
+      ServiceClient.use(() => {
+        return {
+          request () {
+            return {
+              foo: 'bar'
+            }
+          }
+        }
+      })
+
+      const initSpy = suite.sandbox.spy()
+      ServiceClient.use(() => {
+        return {
+          init ({ options }) {
+            initSpy(options)
+          }
+        }
+      })
+
+      const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
+
+      const response = await client.request({ method: 'GET', path: '/', operation: 'GET_' })
+
+      assert.ok(response, 'is response.')
+
+      Sinon.assert.calledWith(initSpy, Sinon.match({
+        foo: 'bar',
+        fizz: 'buzz'
+      }))
+    })
+  })
+
+  it('should not mutate request options object', async function () {
     ServiceClient.use(() => {
       return {
         request () {
           return {
-            fizz: 'buzz'
+            headers: {
+              bar: 'baz'
+            }
           }
         }
       }
     })
 
-    ServiceClient.use(() => {
-      return {
-        request () {
-          return {
-            foo: 'bar'
-          }
-        }
-      }
+    const client = ServiceClient.create('myservice', {
+      hostname: 'foo.com'
     })
 
-    const initSpy = suite.sandbox.spy()
-    ServiceClient.use(() => {
-      return {
-        init ({ options }) {
-          initSpy(options)
-        }
-      }
+    const requestOptions = { fiz: 'buzz' }
+
+    await client.request({
+      method: 'GET',
+      path: '/get',
+      operation: 'get',
+      headers: requestOptions
     })
-
-    const client = ServiceClient.create('myservice', { hostname: 'myservice.service.local' })
-
-    const response = await client.request({ method: 'GET', path: '/', operation: 'GET_' })
-
-    assert.ok(response, 'is response.')
-
-    Sinon.assert.calledWith(initSpy, Sinon.match({
-      foo: 'bar',
-      fizz: 'buzz'
-    }))
+    assert.deepEqual(requestOptions, { fiz: 'buzz' })
   })
 })
