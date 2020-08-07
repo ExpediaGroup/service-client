@@ -54,22 +54,22 @@
     "url": "https://github.com/ExpediaGroup/service-client/issues"
   },
   "engines": {
-    "node": ">=8.0.0",
-    "npm": ">=5.0.0"
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
   },
   "dependencies": {
-    "@hapi/hoek": "^8.5.0",
-    "@hapi/joi": "^16.1.7",
-    "@hapi/wreck": "^16.0.1",
+    "@hapi/hoek": "^9.0.4",
+    "@hapi/wreck": "^17.0.0",
     "circuit-state": "^1.0.0",
     "cuid": "^2.0.0",
     "debug": "^4.0.0",
-    "individual": "^3.0.0"
+    "individual": "^3.0.0",
+    "joi": "^17.2.0"
   },
   "devDependencies": {
-    "@hapi/good-console": "^8.0.0",
-    "@hapi/good": "^8.1.1",
-    "@hapi/hapi": "^18.4.0",
+    "@hapi/good-console": "^9.0.0",
+    "@hapi/good": "^9.0.0",
+    "@hapi/hapi": "^19.2.0",
     "autocannon": "^4.0.0",
     "chai": "^4.1.2",
     "eslint-config-standard": "^14.0.0",
