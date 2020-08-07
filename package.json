@@ -70,7 +70,7 @@
     "@hapi/good-console": "^9.0.0",
     "@hapi/good": "^9.0.0",
     "@hapi/hapi": "^19.2.0",
-    "autocannon": "^4.0.0",
+    "autocannon": "^6.0.0",
     "chai": "^4.1.2",
     "eslint-config-standard": "^14.0.0",
     "eslint-plugin-import": "^2.16.0",
