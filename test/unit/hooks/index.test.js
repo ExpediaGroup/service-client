@@ -152,6 +152,66 @@ describe('Hooks', () => {
           })
         })
       })
+
+      it('should use options for queryParams, pathParams or headers', async function () {
+        const hookOptions = {
+          client: {
+            config: () => ({
+              auth: {
+                clientId: '123',
+                clientSecret: 'abc'
+              }
+            })
+          },
+          context: null,
+          plugins: {
+            auth: {
+              initialRetry: true
+            }
+          }
+        }
+
+        const result = await Hooks.init(hookOptions)
+        const data = {
+          options: {
+            queryParams: { lucky: true },
+            pathParams: { id: '123' },
+            headers: { 'x-test': 'abc' }
+          }
+        }
+        const request = await result.request(data)
+
+        assert.deepEqual(request, {
+          queryParams: { lucky: true },
+          pathParams: { id: '123' },
+          headers: { 'x-test': 'abc' }
+        })
+      })
+
+      it('should not use default options for queryParams, pathParams or headers when not provided', async function () {
+        const hookOptions = {
+          client: {
+            config: () => ({
+              auth: {
+                clientId: '123',
+                clientSecret: 'abc'
+              }
+            })
+          },
+          context: null,
+          plugins: {
+            auth: {
+              initialRetry: true
+            }
+          }
+        }
+
+        const result = await Hooks.init(hookOptions)
+        const data = { options: {} }
+        const request = await result.request(data)
+
+        assert.deepEqual(request, {})
+      })
     })
 
     it('should execute each added hook', async function () {
