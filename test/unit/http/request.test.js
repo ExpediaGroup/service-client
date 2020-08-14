@@ -194,6 +194,15 @@ describe('request', () => {
     assert.equal(response.statusCode, 200, 'is ok')
   })
 
+  it('should make a successful request with `queryParams` in path', async function () {
+    Nock('http://service.local:80')
+      .get('/v1/test/stuff?thing=1&test=2')
+      .reply(200, { message: 'success' })
+
+    const response = await Request('GET', '/v1/test/stuff?thing=1&', { baseUrl: 'http://service.local:80', queryParams: { test: 2 } })
+    assert.equal(response.statusCode, 200, 'is ok')
+  })
+
   it('should make a successful request with `read: true`', async function () {
     Nock('http://service.local:80')
       .get('/v1/test/stuff')
