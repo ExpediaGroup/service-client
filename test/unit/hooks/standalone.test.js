@@ -342,8 +342,14 @@ describe('Using ServiceClient in a standalone context', () => {
       return {
         request () {
           return {
+            queryParams: {
+              fizz: 'buzz-boom'
+            },
+            pathParams: {
+              beep: 'boop-boom'
+            },
             headers: {
-              bar: 'baz'
+              bar: 'baz-boom'
             }
           }
         }
@@ -354,14 +360,35 @@ describe('Using ServiceClient in a standalone context', () => {
       hostname: 'foo.com'
     })
 
-    const requestOptions = { fiz: 'buzz' }
+    const requestOptions = {
+      queryParams: {
+        fizz: 'buzz'
+      },
+      pathParams: {
+        beep: 'boop'
+      },
+      headers: {
+        bar: 'baz'
+      }
+    }
 
     await client.request({
       method: 'GET',
       path: '/get',
       operation: 'get',
-      headers: requestOptions
+      ...requestOptions
     })
-    assert.deepEqual(requestOptions, { fiz: 'buzz' })
+
+    assert.deepEqual(requestOptions, {
+      queryParams: {
+        fizz: 'buzz'
+      },
+      pathParams: {
+        beep: 'boop'
+      },
+      headers: {
+        bar: 'baz'
+      }
+    })
   })
 })
