@@ -1,9 +1,16 @@
+## [3.0.1](https://github.com/expediagroup/service-client/compare/v3.0.0...v3.0.1) (2020-08-17)
+
+#### Fix
+
+* Honor request options ([#50](https://github.com/ExpediaGroup/service-client/pull/50))
+* Refine request options and query param logic ([#51](https://github.com/ExpediaGroup/service-client/pull/51))
+
 ## [3.0.0](https://github.com/expediagroup/service-client/compare/v2.1.1...v3.0.0) (2020-08-07)
 
 #### Breaking
 
 * Drop support for node < 12.
-* Update Github test workflow to only test againt node v 12.x
+* Update Github test workflow to only test against node v 12.x
 * Update dependencies, npm, and engines in package.json to support node version >= 12. ([#49](https://github.com/ExpediaGroup/service-client/pull/49))
 
 ## [2.1.1](https://github.com/expediagroup/service-client/compare/v2.1.0...v2.1.1) (2020-08-03)
