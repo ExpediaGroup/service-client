@@ -2,13 +2,14 @@
 
 const Fs = require('fs')
 const ChildProcess = require('child_process')
+const Path = require('path')
 
 async function start () {
   const dirs = Fs.readdirSync(__dirname)
   for (const i in dirs) {
     const name = dirs[i]
 
-    const testDir = `${__dirname}/${name}`
+    const testDir = Path.join(__dirname, name)
     const stat = Fs.statSync(testDir)
     if (stat.isFile()) {
       return
