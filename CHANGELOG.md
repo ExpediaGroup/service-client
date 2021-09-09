@@ -1,3 +1,9 @@
+## [3.1.0](https://github.com/expediagroup/service-client/compare/v3.0.1...v3.1.0) (2021-09-09)
+
+#### Feature
+
+* Add typings ([#61](https://github.com/ExpediaGroup/service-client/pull/61))
+
 ## [3.0.1](https://github.com/expediagroup/service-client/compare/v3.0.0...v3.0.1) (2020-08-17)
 
 #### Fix
