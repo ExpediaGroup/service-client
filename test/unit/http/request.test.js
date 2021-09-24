@@ -213,6 +213,34 @@ describe('request', () => {
     assert.ok(response.payload, 'is body')
   })
 
+  it('should make a successful request with `read: true` - onPostRead', async function () {
+    const readStub = suite.sandbox.stub(Wreck, 'read')
+    readStub.onCall(0).returns(null)
+    readStub.onCall(1).returns({ message: 'success' })
+    const hooks = {
+      onPostRead: () => {
+        return { statusCode: 200 }
+      }
+    }
+    Nock('http://service.local:80')
+      .get('/graphql')
+      .reply(200, {
+        errors: [{
+          message:
+                  'Missing or invalid Bearer token in the Authorization header.',
+          extensions: {
+            code: 'FORBIDDEN'
+          }
+        }
+        ]
+      }
+      )
+
+    const response = await Request('GET', '/graphql', { baseUrl: 'http://service.local:80', read: true }, hooks)
+    assert.equal(response.statusCode, 200, 'is ok')
+    assert.ok(response.payload, 'is body')
+  })
+
   it('should make a successful request without `connectTimeout`', async function () {
     const response = await makeRequest({
       getDeferred: () => Request('GET', '/v1/test/stuff', { baseUrl: 'https://service.local:80', connectTimeout: 0 })
