@@ -44,7 +44,7 @@ describe('Using ServiceClient in a standalone context', () => {
       error: suite.sandbox.spy(),
       stats: suite.sandbox.spy(),
       end: suite.sandbox.spy(),
-      onPostRead: suite.sandbox.spy()
+      read: suite.sandbox.spy()
     }
     ServiceClient.use(() => {
       return spies
@@ -66,9 +66,9 @@ describe('Using ServiceClient in a standalone context', () => {
     Sinon.assert.notCalled(spies.error) // no error for this test
     Sinon.assert.calledOnce(spies.stats)
     Sinon.assert.calledOnce(spies.end)
-    Sinon.assert.calledOnce(spies.onPostRead)
+    Sinon.assert.calledOnce(spies.read)
 
-    Sinon.assert.callOrder(spies.request, spies.init, spies.socket, spies.response, spies.onPostRead, spies.stats, spies.end)
+    Sinon.assert.callOrder(spies.request, spies.init, spies.socket, spies.response, spies.read, spies.stats, spies.end)
   })
 
   it('should call hooks (error thrown in plugin initialization)', async function () {

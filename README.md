@@ -349,7 +349,7 @@ async function plugin({client, context, plugins}) {
          * @param {object} data - data provided to the hook on every request
          * @param {object} data.response - the response received from Wreck after being read
          */
-        async onPostRead(data) {
+        async read(data) {
 
         },
 
