@@ -191,7 +191,7 @@ Service-Client plugins provide the ability to hook into different spots of a req
 Plugins are registered with `ServiceClient.mergeConfig({plugins: []})` or `ServiceClient.use([])` and affect all Service-Client instances created thereafter.
 
 ### Overview
-A plugin exports a function which, when executed, returns an object containing a set of hook functions to be ran during a request's lifecycle. See all available hooks [below](#available-plugins).
+A plugin exports a function which, when executed, returns an object containing a set of hook functions to be run during a request's lifecycle. See all available hooks [below](#available-plugins).
 
 Example:
 ```js
@@ -322,7 +322,7 @@ async function plugin({client, context, plugins}) {
          * This hook is special. The only value that should be returned here is
          * a response object. This is helpful for authentication plugins that
          * want to retry a request if an invalid response was received. A request
-         * made within this hook could return it's response object here.
+         * made within this hook could return its response object here.
          *
          * There's a catch however. Since response objects from multiple hooks
          * cannot be merged, only the first response object will be taken. All
@@ -332,6 +332,24 @@ async function plugin({client, context, plugins}) {
          * @param {object} data.response - the response received from Wreck before being read
          */
         async response(data) {
+
+        },
+
+        /**
+         * This hook is special. This hook behaves just like response but can be used to 
+         * validate data after being read. The only value that should be returned here is
+         * a response object. This is helpful for authentication plugins that
+         * want to retry a request if an invalid response was received. A request
+         * made within this hook could return its response object here.
+         *
+         * There's a catch however. Since response objects from multiple hooks
+         * cannot be merged, only the first response object will be taken. All
+         * other returned responses are discarded.
+         *
+         * @param {object} data - data provided to the hook on every request
+         * @param {object} data.response - the response received from Wreck after being read
+         */
+        async read(data) {
 
         },
 
