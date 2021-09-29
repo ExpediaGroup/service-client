@@ -1,3 +1,9 @@
+## Unreleased
+
+#### Feature
+
+* add support for a read hook ([#63](https://github.com/ExpediaGroup/service-client/pull/63))
+
 ## [3.1.0](https://github.com/expediagroup/service-client/compare/v3.0.1...v3.1.0) (2021-09-09)
 
 #### Feature
