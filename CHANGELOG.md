@@ -1,4 +1,4 @@
-## Unreleased
+## [3.2.0](https://github.com/expediagroup/service-client/compare/v3.1.0...v3.2.0) (2021-09-29)
 
 #### Feature
 
