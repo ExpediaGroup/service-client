@@ -1,3 +1,9 @@
+### [4.0.0] Breaking change
+
+- [Breaking] Drop support for node < 12.
+- Update Github test workflow to only test againt node v 14.x
+- Update dependencies, npm, and engines in package.json to support node version >= 14.
+
 ## [3.2.0](https://github.com/expediagroup/service-client/compare/v3.1.0...v3.2.0) (2021-09-29)
 
 #### Feature
