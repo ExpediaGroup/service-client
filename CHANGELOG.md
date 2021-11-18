@@ -1,3 +1,7 @@
+### Unreleased
+
+- Use `tls.rootCertificates` and `https.globalAgent.options` for default options used to create https agents.
+
 ### [4.0.0] Breaking change
 
 - [Breaking] Drop support for node < 12.
