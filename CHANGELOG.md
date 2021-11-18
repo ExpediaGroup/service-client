@@ -1,3 +1,7 @@
+### Unreleased
+
+- Use `globalAgent` options by default for https agents.
+
 ### [4.0.0] Breaking change
 
 - [Breaking] Drop support for node < 12.
