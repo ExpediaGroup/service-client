@@ -1,8 +1,12 @@
-### Unreleased
+## [4.1.0](https://github.com/expediagroup/service-client/compare/v4.0.0...v4.1.0) (2021-11-18)
+
+#### Feature
 
 - Use `tls.rootCertificates` and `https.globalAgent.options` for default options used to create https agents.
 
-### [4.0.0] Breaking change
+## [4.0.0](https://github.com/expediagroup/service-client/compare/v3.2.0...v4.0.0) (2021-11-04)
+
+#### Breaking
 
 - [Breaking] Drop support for node < 12.
 - Update Github test workflow to only test againt node v 14.x
