@@ -111,7 +111,7 @@ Returns a new service client instance for `servicename` with optional `overrides
     - **keepAlive** - Defaults to `true`.
     - **keepAliveMsecs** - Defaults to `30000`.
     - **secureContext** - A SecureContext instance. Defaults to an instance created internally using `secureContextOptions`.
-    - **secureContextOptions** - Instead of passing `secureContext` here, pass options to initialize `secureContext` internally. See [tls.createSecureContext()](https://nodejs.org/docs/latest-v14.x/api/tls.html#tls_tls_createsecurecontext_options) options. By default, `ca`, `cert`, and `key` from `https.globalAgent.options` are included as options here.
+    - **secureContextOptions** - Instead of passing `secureContext` here, pass options to initialize `secureContext` internally. See [tls.createSecureContext()](https://nodejs.org/docs/latest-v14.x/api/tls.html#tls_tls_createsecurecontext_options) options. By default, `cert` and `key` from `https.globalAgent.options` are included as options here. `ca` is also included by default, but is a combination of `tls.rootCertificates` and `https.globalAgent.options.ca`.
 - **plugins** - Configuration object for [ServiceClient plugins](#plugins).
 
 ### `ServiceClient.read(response, [options])`
