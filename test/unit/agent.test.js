@@ -80,11 +80,11 @@ describe('agents', () => {
   it('should include globalAgent options: ca, cert, key', () => {
     sandbox.spy(Tls, 'createSecureContext')
 
-    const ca = [Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'ca.crt'))]
+    const ca = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'ca.crt'))
     const cert = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'cert.pem'))
     const key = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'key.pem'))
 
-    Https.globalAgent.options = { ca, cert, key }
+    Https.globalAgent.options = { ca: [ca], cert, key }
 
     const instance = Agent.create('https', {
       agentOptions: {
@@ -96,6 +96,12 @@ describe('agents', () => {
 
     assert.ok(instance instanceof Https.Agent, 'is https agent.')
     assert.ok(instance.options.secureContext, 'is pre-cached secureContext.')
-    Sinon.assert.calledWith(Tls.createSecureContext, { ca, cert, key, foo: 'bar' })
+
+    const options = Tls.createSecureContext.args[0][0]
+
+    assert.ok(options.cert === cert, 'has global agent cert')
+    assert.ok(options.key === key, 'has global agent key')
+    assert.ok(options.ca.length > 10, 'has root certificates')
+    assert.ok(options.ca.includes(ca), 'has global agent ca')
   })
 })

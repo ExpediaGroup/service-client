@@ -1,6 +1,6 @@
 ### Unreleased
 
-- Use `globalAgent` options by default for https agents.
+- Use `tls.rootCertificates` and `https.globalAgent.options` for default options used to create https agents.
 
 ### [4.0.0] Breaking change
 
