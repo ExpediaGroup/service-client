@@ -1,6 +1,8 @@
-import {ResponseObject} from '@hapi/hapi';
-import {Logger} from 'pino';
-import * as stream from 'stream';
+import { ResponseObject } from '@hapi/hapi';
+import Http from 'http';
+import { Logger } from 'pino';
+import QueryString from 'querystring';
+import Stream, * as stream from 'stream';
 
 export type ServiceClientOptions = {
     agent?: {[key: string]: string};
@@ -13,13 +15,8 @@ export type ServiceClientOptions = {
     operation: string;
     path?: string;
     pathParams?: {[key: string]: string};
-    payload?: 
-        | stream.Readable
-        | Buffer
-        | string
-        | Uint8Array
-        | {[key: string]: string | string[]};
-    queryParams?: {[key: string]: string | string[]};
+    payload?: string | Buffer | Stream.Readable | object;
+    queryParams?: QueryParams;
     read?: boolean;
     readOptions?: {
         timeout?: number;
@@ -39,6 +36,9 @@ type Headers = {
         | undefined;
 };
 
+
+interface QueryParams extends QueryString.ParsedUrlQueryInput {}
+
 export type ServiceContext = {
     dataSources: {[serviceClient: string]: ClientInstance};
     request: ServiceRequest;
@@ -56,18 +56,22 @@ export interface ServiceRequest {
     };
 }
 
-export interface ServiceClientResponse extends ResponseObject {
-    readonly payload:
-        | stream.Readable
+type ServiceClientResponsePayload = stream.Readable
         | Buffer
         | string
         | {[key: string]: string | string[]};
+
+export interface ServiceClientResponse extends ResponseObject {
+    readonly payload: ServiceClientResponsePayload;
 }
 
 export type ClientInstance = {
-    request: (
+    request: <T = ServiceClientResponsePayload>(
         serviceClientOptions: ServiceClientOptions
-    ) => ServiceClientResponse;
+    ) => T extends ServiceClientResponsePayload ? Promise<ServiceClientResponse> : Http.IncomingMessage & {
+      req?: Http.ClientRequest;
+      payload: T;
+    }
 };
 
 export type GlobalConfig = {
