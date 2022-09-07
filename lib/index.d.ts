@@ -1,8 +1,19 @@
 import { ResponseObject } from '@hapi/hapi';
+import * as Wreck from '@hapi/wreck';
 import Http from 'http';
 import { Logger } from 'pino';
 import QueryString from 'querystring';
-import Stream, * as stream from 'stream';
+import * as stream from 'stream';
+
+type Headers = {
+    readonly [name: string]:
+        | string
+        | readonly string[]
+        | boolean
+        | undefined;
+};
+
+type Payload = (Parameters<typeof Wreck.request>[2])['payload'];
 
 export type ServiceClientOptions = {
     agent?: {[key: string]: string};
@@ -15,8 +26,8 @@ export type ServiceClientOptions = {
     operation: string;
     path?: string;
     pathParams?: {[key: string]: string};
-    payload?: string | Buffer | Stream.Readable | object;
-    queryParams?: QueryParams;
+    payload?: Payload;
+    queryParams?: QueryString.ParsedUrlQueryInput;
     read?: boolean;
     readOptions?: {
         timeout?: number;
@@ -26,22 +37,6 @@ export type ServiceClientOptions = {
     };
     redirects?: number;
     timeout?: number;
-};
-
-type Headers = {
-    readonly [name: string]:
-        | string
-        | readonly string[]
-        | boolean
-        | undefined;
-};
-
-
-interface QueryParams extends QueryString.ParsedUrlQueryInput {}
-
-export type ServiceContext = {
-    dataSources: {[serviceClient: string]: ClientInstance};
-    request: ServiceRequest;
 };
 
 export interface ServiceRequest {
@@ -56,6 +51,11 @@ export interface ServiceRequest {
     };
 }
 
+export type ServiceContext = {
+    dataSources: {[serviceClient: string]: ClientInstance};
+    request: ServiceRequest;
+};
+
 type ServiceClientResponsePayload = stream.Readable
         | Buffer
         | string
@@ -68,10 +68,10 @@ export interface ServiceClientResponse extends ResponseObject {
 export type ClientInstance = {
     request: <T = ServiceClientResponsePayload>(
         serviceClientOptions: ServiceClientOptions
-    ) => T extends ServiceClientResponsePayload ? Promise<ServiceClientResponse> : Http.IncomingMessage & {
-      req?: Http.ClientRequest;
-      payload: T;
-    }
+    ) => T extends ServiceClientResponsePayload ? Promise<ServiceClientResponse> : Promise<Http.IncomingMessage & {
+        req?: Http.ClientRequest;
+        payload: T;
+    }>
 };
 
 export type GlobalConfig = {
