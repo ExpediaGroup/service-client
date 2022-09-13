@@ -13,8 +13,6 @@ type Headers = {
         | undefined;
 };
 
-type Payload = (Parameters<typeof Wreck.request>[2])['payload'];
-
 export type ServiceClientOptions = {
     agent?: {[key: string]: string};
     connectTimeout?: number;
@@ -26,7 +24,7 @@ export type ServiceClientOptions = {
     operation: string;
     path?: string;
     pathParams?: {[key: string]: string};
-    payload?: Payload;
+    payload?: string | Buffer | Stream.Readable | object;
     queryParams?: QueryString.ParsedUrlQueryInput;
     read?: boolean;
     readOptions?: {
