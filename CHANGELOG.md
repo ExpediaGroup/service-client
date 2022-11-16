@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/ExpediaGroup/service-client/compare/v4.1.0...v4.2.0) (2022-11-16)
+
+
+### Features
+
+* empty commit to force minor semantic release ([#72](https://github.com/ExpediaGroup/service-client/issues/72)) ([a1a8d30](https://github.com/ExpediaGroup/service-client/commit/a1a8d306915059a8ad901392dc2db371627e31a2))
+
 ## [4.1.0](https://github.com/expediagroup/service-client/compare/v4.0.0...v4.1.0) (2021-11-18)
 
 #### Feature
