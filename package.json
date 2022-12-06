@@ -43,8 +43,8 @@
     "url": "https://github.com/ExpediaGroup/service-client/issues"
   },
   "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=8.0.0"
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
