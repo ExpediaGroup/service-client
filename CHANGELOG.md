@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/ExpediaGroup/service-client/compare/v4.2.0...v4.3.0) (2022-12-07)
+
+
+### Features
+
+* Upgrade to node v16 ([#73](https://github.com/ExpediaGroup/service-client/issues/73)) ([bc4dc68](https://github.com/ExpediaGroup/service-client/commit/bc4dc68be9c149fb4f6025ec9ab7012f3e3172de))
+
 # [4.2.0](https://github.com/ExpediaGroup/service-client/compare/v4.1.0...v4.2.0) (2022-11-16)
 
 
