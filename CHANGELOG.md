@@ -1,3 +1,10 @@
+## [4.3.1](https://github.com/ExpediaGroup/service-client/compare/v4.3.0...v4.3.1) (2023-01-04)
+
+
+### Bug Fixes
+
+* upgrade to joi@17.7.0 ([#74](https://github.com/ExpediaGroup/service-client/issues/74)) ([af6db95](https://github.com/ExpediaGroup/service-client/commit/af6db95aa77d32ada775b2fed6536ea3a295db9a))
+
 # [4.3.0](https://github.com/ExpediaGroup/service-client/compare/v4.2.0...v4.3.0) (2022-12-07)
 
 
