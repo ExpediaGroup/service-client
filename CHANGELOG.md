@@ -1,3 +1,10 @@
+## [4.3.2](https://github.com/ExpediaGroup/service-client/compare/v4.3.1...v4.3.2) (2023-01-04)
+
+
+### Bug Fixes
+
+* bump json5 from 1.0.1 to 1.0.2 ([#75](https://github.com/ExpediaGroup/service-client/issues/75)) ([ae9df57](https://github.com/ExpediaGroup/service-client/commit/ae9df575b48762d98a03496912b5180770c08bca))
+
 ## [4.3.1](https://github.com/ExpediaGroup/service-client/compare/v4.3.0...v4.3.1) (2023-01-04)
 
 
