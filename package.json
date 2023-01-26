@@ -68,7 +68,7 @@
     "@hapi/hoek": "^9.0.4",
     "@hapi/wreck": "^17.0.0",
     "circuit-state": "^1.0.0",
-    "cuid": "^2.0.0",
+    "cuid": "^3.0.0",
     "debug": "^4.0.0",
     "individual": "^3.0.0",
     "joi": "^17.7.0"
