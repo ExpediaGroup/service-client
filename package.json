@@ -76,7 +76,7 @@
   "devDependencies": {
     "@hapi/good": "^9.0.0",
     "@hapi/good-console": "^9.0.0",
-    "@hapi/hapi": "^20.2.1",
+    "@hapi/hapi": "^21.2.1",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "autocannon": "^7.0.0",
