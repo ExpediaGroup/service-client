@@ -1,3 +1,10 @@
+## [4.3.3](https://github.com/ExpediaGroup/service-client/compare/v4.3.2...v4.3.3) (2023-02-16)
+
+
+### Bug Fixes
+
+* Altering the order of semantic release config file to have it correct ([#90](https://github.com/ExpediaGroup/service-client/issues/90)) ([8a53994](https://github.com/ExpediaGroup/service-client/commit/8a539945582aa91e9a23b8e6d923f406a66fa579))
+
 ## [4.3.2](https://github.com/ExpediaGroup/service-client/compare/v4.3.1...v4.3.2) (2023-01-04)
 
 
