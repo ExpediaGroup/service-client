@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/ExpediaGroup/service-client/compare/v4.3.3...v4.4.0) (2023-02-22)
+
+
+### Features
+
+* Updating some dependencies ([#91](https://github.com/ExpediaGroup/service-client/issues/91)) ([5495738](https://github.com/ExpediaGroup/service-client/commit/5495738f9fc61441c4ea65ffd77c89a1a084ebb9))
+
 ## [4.3.3](https://github.com/ExpediaGroup/service-client/compare/v4.3.2...v4.3.3) (2023-02-16)
 
 
