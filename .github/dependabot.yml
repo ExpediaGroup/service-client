@@ -13,3 +13,7 @@ updates:
     reviewers:
       - "@ExpediaGroup/catalyst-committers"
     open-pull-requests-limit: 10
+    ignore:
+      # Ignore Hapi major updates
+      - dependency-name: "@hapi/hapi"
+        update-types: ["version-update:semver-major"]
