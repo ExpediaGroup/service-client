@@ -79,7 +79,7 @@ For a more thorough collection of examples see the [examples directory](https://
 ### Global Defaults
 
 - **protocol** - The protocol to use for the request. Defaults to `"http:"`.
-- **connectTimeout** - The connection timeout. Defaults to `1000`.
+- **connectTimeout** - The number of ms to wait for a socket connection. Defaults to `1000`.
 - **maxConnectRetry** - After `connectTimeout` elapses, how many attempts to retry the connection. Defaults to `0`.
 - **timeout** - The number of ms to wait without receiving a response before aborting the request. Defaults to `10000`.
 - **maxFailures** - Maximum number of failures before circuit breaker flips open. See [`circuit-state`](https://github.com/tlivings/circuit-state#api). Defaults to `3`.
