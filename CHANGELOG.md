@@ -1,3 +1,10 @@
+## [4.4.1](https://github.com/ExpediaGroup/service-client/compare/v4.4.0...v4.4.1) (2023-03-24)
+
+
+### Bug Fixes
+
+* modifing order of the timeout and listeners to avoid incorrect errors ([#100](https://github.com/ExpediaGroup/service-client/issues/100)) ([a75e88c](https://github.com/ExpediaGroup/service-client/commit/a75e88ca8f69dd6ba6b85df427a3e220f03d4b16))
+
 # [4.4.0](https://github.com/ExpediaGroup/service-client/compare/v4.3.3...v4.4.0) (2023-02-22)
 
 
