@@ -1,7 +1,9 @@
 import { ResponseObject } from '@hapi/hapi';
 import Http from 'http';
+import Https from 'https';
 import QueryString from 'querystring';
 import * as stream from 'stream';
+import { SecureContext, SecureContextOptions } from 'tls';
 
 type Headers = {
     readonly [name: string]:
@@ -54,30 +56,33 @@ export type ClientInstance = {
 };
 
 export type ServiceConfig = {
-    // url
     protocol?: string;
-    // resiliency
+    hostname?: string;
+    hostnameConfig?: any,
+    port?: number;
+    basePath?: string;
     connectTimeout?: number;
     maxConnectRetry?: number;
     timeout?: number;
-    maxFailures?: number; // circuit breaking
-    resetTime?: number; // circuit breaking
-    // agent options
+    maxFailures?: number;
+    resetTime?: number;
+    agent?: Http.Agent | Https.Agent;
     agentOptions?: {
         keepAlive?: boolean;
         keepAliveMsecs?: number;
+        secureContext?: SecureContext;
+        secureContextOptions?: SecureContextOptions;
     };
+    plugins?: any;
 };
-
-export type ServiceOverrides = Record<string, ServiceConfig>;
 
 export type GlobalConfig = {
     base?: ServiceConfig;
     plugins?: any[];
-    overrides?: ServiceOverrides;
+    overrides?: Record<string, ServiceConfig>;
 }
 
-export function create(servicename: string, overrides?: ServiceOverrides): ClientInstance;
+export function create(servicename: string, overrides?: ServiceConfig): ClientInstance;
 
 export function remove(servicename: string): void;
 
