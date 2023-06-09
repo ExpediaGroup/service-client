@@ -1,7 +1,0 @@
-{
-    "extends": [
-        "config:base",
-        "github>ExpediaGroup/renovate-config-catalyst:semanticCommits",
-        "github>ExpediaGroup/renovate-config-catalyst:temporarilyDisable"
-    ]
-}
