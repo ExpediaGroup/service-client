@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/ExpediaGroup/service-client/compare/v4.4.1...v5.0.0) (2023-04-10)
+
+
+### Features
+
+* publish breaking release ([#107](https://github.com/ExpediaGroup/service-client/issues/107)) ([0d908c0](https://github.com/ExpediaGroup/service-client/commit/0d908c06976e1e074f2611c813813f2b9bebf316))
+
+
+### BREAKING CHANGES
+
+* replaced deprecated cuid package with paralleldrive/cuid2
+
 ## [4.4.1](https://github.com/ExpediaGroup/service-client/compare/v4.4.0...v4.4.1) (2023-03-24)
 
 
