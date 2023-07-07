@@ -17,3 +17,6 @@ updates:
       # Ignore Hapi major updates
       - dependency-name: "@hapi/hapi"
         update-types: ["version-update:semver-major"]
+      # Ignore Semantic Release major updates
+      - dependency-name: "semantic-release"
+        update-types: ["version-update:semver-major"]
