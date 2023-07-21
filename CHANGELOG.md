@@ -1,3 +1,17 @@
+## [5.0.2](https://github.com/ExpediaGroup/service-client/compare/v5.0.1...v5.0.2) (2023-07-07)
+
+
+### Bug Fixes
+
+* upgrade eslint-config-standard ([#120](https://github.com/ExpediaGroup/service-client/issues/120)) ([f6bb175](https://github.com/ExpediaGroup/service-client/commit/f6bb175c6d054d93b5230cfc93ec3495577c97fc))
+
+## [5.0.1](https://github.com/ExpediaGroup/service-client/compare/v5.0.0...v5.0.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* bump @hapi/wreck from 17.2.0 to 18.0.1 ([515f82a](https://github.com/ExpediaGroup/service-client/commit/515f82af70f98e6683c36be79924516758e100a3))
+
 # [5.0.0](https://github.com/ExpediaGroup/service-client/compare/v4.4.1...v5.0.0) (2023-04-10)
 
 
