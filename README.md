@@ -1,6 +1,10 @@
 ![Node.js Version](https://img.shields.io/badge/node->=14.0.0-brightgreen.svg?longCache=true&style=flat&logo=node.js)
 ![NPM Version](https://img.shields.io/badge/npm->=6.0.0-brightgreen.svg?longCache=true&style=flat&logo=npm)
 [![NPM Downloads](https://img.shields.io/npm/dm/@vrbo/service-client.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@vrbo/service-client)
+![No Maintenance Intended](https://img.shields.io/maintenance/no/2023.svg)
+
+# :warning: **Deprecation Notice** :warning:
+This package is now deprecated and will not receive any updates in the future.
 
 # @vrbo/service-client
 
