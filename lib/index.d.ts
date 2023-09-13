@@ -1,9 +1,9 @@
 import { ResponseObject } from '@hapi/hapi';
-import * as Wreck from '@hapi/wreck';
 import Http from 'http';
-import { Logger } from 'pino';
+import Https from 'https';
 import QueryString from 'querystring';
 import * as stream from 'stream';
+import { SecureContext, SecureContextOptions } from 'tls';
 
 type Headers = {
     readonly [name: string]:
@@ -16,7 +16,7 @@ type Headers = {
 export type ServiceClientOptions = {
     agent?: {[key: string]: string};
     connectTimeout?: number;
-    context?: ServiceRequest;
+    context?: any;
     headers?: Headers;
     hostPrefix?: string;
     maxConnectRetry?: number;
@@ -24,7 +24,7 @@ export type ServiceClientOptions = {
     operation: string;
     path?: string;
     pathParams?: {[key: string]: string};
-    payload?: string | Buffer | Stream.Readable | object;
+    payload?: string | Buffer | stream.Readable | object;
     queryParams?: QueryString.ParsedUrlQueryInput;
     read?: boolean;
     readOptions?: {
@@ -35,23 +35,6 @@ export type ServiceClientOptions = {
     };
     redirects?: number;
     timeout?: number;
-};
-
-export interface ServiceRequest {
-    headers: Headers;
-    logger: Logger;
-    auth: {
-        isAuthenticated: boolean;
-        credentials: {
-            apiToken: string;
-            principalToken: string;
-        };
-    };
-}
-
-export type ServiceContext = {
-    dataSources: {[serviceClient: string]: ClientInstance};
-    request: ServiceRequest;
 };
 
 type ServiceClientResponsePayload = stream.Readable
@@ -72,27 +55,34 @@ export type ClientInstance = {
     }>
 };
 
-export type GlobalConfig = {
-    base?: {
-        // url
-        protocol?: string;
-        // resiliency
-        connectTimeout?: number;
-        maxConnectRetry?: number;
-        timeout?: number;
-        maxFailures?: number; // circuit breaking
-        resetTime?: number; // circuit breaking
-        // agent options
-        agentOptions?: {
-            keepAlive?: boolean;
-            keepAliveMsecs?: number;
-        };
+export type ServiceConfig = {
+    protocol?: string;
+    hostname?: string;
+    hostnameConfig?: any,
+    port?: number;
+    basePath?: string;
+    connectTimeout?: number;
+    maxConnectRetry?: number;
+    timeout?: number;
+    maxFailures?: number;
+    resetTime?: number;
+    agent?: Http.Agent | Https.Agent;
+    agentOptions?: {
+        keepAlive?: boolean;
+        keepAliveMsecs?: number;
+        secureContext?: SecureContext;
+        secureContextOptions?: SecureContextOptions;
     };
+    plugins?: any;
+};
+
+export type GlobalConfig = {
+    base?: ServiceConfig;
     plugins?: any[];
-    overrides?: {};
+    overrides?: Record<string, ServiceConfig>;
 }
 
-export function create(servicename: string, overrides?: {}): ClientInstance;
+export function create(servicename: string, overrides?: ServiceConfig): ClientInstance;
 
 export function remove(servicename: string): void;
 
